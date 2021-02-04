@@ -16,8 +16,9 @@ class PhysicsObject
 public:
 
 	virtual void FixedUpdate(glm::vec2 a_gravity, float a_timeStep) = 0;
-	virtual void draw() = 0;
+	virtual void MakeGizmo() = 0;
 	virtual void resetPosition() {}
+	
 	virtual void Debug() = 0;
 
 protected:

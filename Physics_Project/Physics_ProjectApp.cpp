@@ -4,6 +4,7 @@
 #include "Input.h"
 #include <random>
 #include "glm\ext.hpp"
+#include "Sphere.h"
 #include <Gizmos.h>
 
 Physics_ProjectApp::Physics_ProjectApp()
@@ -82,7 +83,10 @@ void Physics_ProjectApp::draw()
 		-100 / aspectRatio, 100 / aspectRatio, -1.f, 1.f));
 	// draw your stuff here!
 
+	Sphere* ball;
+	ball = new Sphere(glm::vec2(-40, 0), glm::vec2(10, 30), 3.f, 10, glm::vec4(1, 0, 0, 1));
 
+	m_physicsScene->addActor(ball);
 	// output some text, uses the last used color
 	m_2dRenderer->drawText(m_font, "Press ESC to quit", 0, 10);
 

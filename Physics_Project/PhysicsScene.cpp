@@ -77,7 +77,7 @@ void PhysicsScene::draw()
 {
 	for (auto pActor : m_actors)
 	{
-		pActor->draw();
+		pActor->MakeGizmo();
 	}
 
 }
