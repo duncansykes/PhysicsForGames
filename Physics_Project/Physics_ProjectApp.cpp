@@ -54,10 +54,18 @@ void Physics_ProjectApp::update(float deltaTime) {
 	static const glm::vec2 scrExtents(100, 50);
 	static const glm::vec2 boxEx(7, 3);
 	static const glm::vec2 StartPos((
-		-(cols) >> 1 )*(boxEx.x * 2) + vSapce + boxEx.x + (vSapce/2.f), scrExtents.y -
-		(boxEx).y * 2)
-	)
+		-(cols) >> 1)* (boxEx.x * 2) + vSapce + boxEx.x + (vSapce / 2.f), scrExtents.y -
+		((boxEx).y * 2) + hSpace
+	);
 
+	glm::vec2 pos;
+	for (int y = 0; y < rows; y++)
+	{
+		pos = glm::vec2(StartPos.x, StartPos.y - 
+		(y*((boxEx.x+(vSapce / 2.f),
+			)))
+		);
+	}
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
 		quit();
