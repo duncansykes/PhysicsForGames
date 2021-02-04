@@ -61,11 +61,17 @@ void Physics_ProjectApp::update(float deltaTime) {
 	glm::vec2 pos;
 	for (int y = 0; y < rows; y++)
 	{
-		pos = glm::vec2(StartPos.x, StartPos.y - 
-		(y*((boxEx.x+(vSapce / 2.f),
-			)))
-		);
+		pos = glm::vec2(StartPos.x, StartPos.y -
+			(y * ((boxEx.y * 2) + hSpace)));
+		for (int x = 0; x < cols; x++) {
+			aie::Gizmos::add2DAABBFilled(pos, boxEx, colors[y]);
+			pos.x += (boxEx.x * 2) + vSapce;
+		}
 	}
+
+	aie::Gizmos::add2DCircle(glm::vec2(0, -35), 3, 12, glm::vec4(1, 1, 0, 1));
+	aie::Gizmos::add2DAABBFilled(glm::vec2(0, -40), glm::vec2(12, 2), glm::vec4(1, 0, 1, 1));
+
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
 		quit();
