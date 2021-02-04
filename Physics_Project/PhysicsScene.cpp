@@ -1,6 +1,8 @@
 #include "PhysicsScene.h"
 #include "PhysicsObject.h"
-
+#include "Rigidbody.h"
+#include <iostream>
+#include <list>
 PhysicsScene::PhysicsScene() : m_timeStep(0.01f), m_gravity(glm::vec2(0,0))
 {
 
@@ -8,7 +10,10 @@ PhysicsScene::PhysicsScene() : m_timeStep(0.01f), m_gravity(glm::vec2(0,0))
 
 PhysicsScene::~PhysicsScene()
 {
-
+	for (auto pActor : m_actors)
+	{
+		delete pActor;
+	}
 }
 
 void PhysicsScene::addActor(PhysicsObject* a_actor)
@@ -29,7 +34,7 @@ void PhysicsScene::removeActor(PhysicsObject* a_actor)
 
 void PhysicsScene::update(float deltaTime)
 {
-
+	static std::list<PhysicsObject*> dirty; // MUST REMOVE
 	static float accumulatedTime = 0.f;
 	accumulatedTime += deltaTime;
 
@@ -42,6 +47,28 @@ void PhysicsScene::update(float deltaTime)
 
 		accumulatedTime -= m_timeStep;
 		
+		for (auto pActor : m_actors)
+		{
+			for (auto pOther : m_actors)
+			{
+				if (pActor == pOther) continue;
+				if (std::find(dirty.begin(), dirty.end(), pActor) != dirty.end() &&
+					std::find(dirty.begin(), dirty.end(), pOther) != dirty.end())
+					continue;
+
+				Rigidbody* pRigid = dynamic_cast<Rigidbody*>(pActor);
+				if (pRigid->CheckCollision(pOther) == true)
+				{
+					pRigid->ApplyForceToOther(dynamic_cast<Rigidbody*>(pOther),
+						pRigid->GetVelocity() / pRigid->GetMass());
+					dirty.push_back(pRigid);
+					dirty.push_back(pOther);
+				}
+		
+			}
+
+		}
+		dirty.clear();
 	}
 
 }
@@ -53,4 +80,15 @@ void PhysicsScene::draw()
 		pActor->draw();
 	}
 
+}
+
+void PhysicsScene::DebugScene()
+{
+	int count = 0;
+	for (auto pActor : m_actors)
+	{
+		std::cout << count << " : ";
+		pActor->Debug();
+		count++;
+	}
 }

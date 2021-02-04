@@ -17,6 +17,7 @@ public:
 
 	void update(float deltaTime);
 	void draw();
+	void DebugScene();
 
 	void setGravity(const glm::vec2 a_gravity) { m_gravity = a_gravity; }
 	glm::vec2 GetGravity() { return m_gravity; }

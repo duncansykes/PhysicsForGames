@@ -14,6 +14,7 @@ public:
 	
 	float GetRadius() { return m_radius; }
 	glm::vec4 GetColor() { return m_color; }
+
 protected:
 
 	float m_radius;
