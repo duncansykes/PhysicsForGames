@@ -32,5 +32,5 @@ void Rigidbody::ApplyForceToOther(Rigidbody* a_otherActor, glm::vec2 a_force)
 
 bool Rigidbody::CheckCollision(PhysicsObject* pOther)
 {
-
+	return false;
 }
