@@ -2,6 +2,7 @@
 #include "Texture.h"
 #include "Font.h"
 #include "Input.h"
+#include <random>
 #include "glm\ext.hpp"
 #include <Gizmos.h>
 
@@ -23,7 +24,7 @@ bool Physics_ProjectApp::startup() {
 	// TODO: remember to change this when redistributing a build!
 	// the following path would be used instead: "./font/consolas.ttf"
 	m_font = new aie::Font("../bin/font/consolas.ttf", 32);
-
+	srand(time(NULL));
 	return true;
 }
 
@@ -35,43 +36,12 @@ void Physics_ProjectApp::shutdown() {
 
 void Physics_ProjectApp::update(float deltaTime) {
 
+
+	
 	// input example
 	aie::Input* input = aie::Input::getInstance();
 
-	static const glm::vec4 colors[] = {
-		glm::vec4(1,0,0,1), glm::vec4(0,1,0,1),
-		glm::vec4(0,0,1,1), glm::vec4(0.8f,0, 0.5f, 1),
-		glm::vec4(0,1,1,1)
-	};
-
-	static const int rows = 5;
-	static const int cols = 10;
-
-	static const int hSpace = 1;
-	static const int vSapce = 1;
-
-
-	static const glm::vec2 scrExtents(100, 50);
-	static const glm::vec2 boxEx(7, 3);
-	static const glm::vec2 StartPos((
-		-(cols) >> 1)* (boxEx.x * 2) + vSapce + boxEx.x + (vSapce / 2.f), scrExtents.y -
-		((boxEx).y * 2) + hSpace
-	);
-
-	glm::vec2 pos;
-	for (int y = 0; y < rows; y++)
-	{
-		pos = glm::vec2(StartPos.x, StartPos.y -
-			(y * ((boxEx.y * 2) + hSpace)));
-		for (int x = 0; x < cols; x++) {
-			aie::Gizmos::add2DAABBFilled(pos, boxEx, colors[y]);
-			pos.x += (boxEx.x * 2) + vSapce;
-		}
-	}
-
-	aie::Gizmos::add2DCircle(glm::vec2(0, -35), 3, 12, glm::vec4(1, 1, 0, 1));
-	aie::Gizmos::add2DAABBFilled(glm::vec2(0, -40), glm::vec2(12, 2), glm::vec4(1, 0, 1, 1));
-
+	
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
 		quit();
@@ -86,8 +56,7 @@ void Physics_ProjectApp::draw() {
 	m_2dRenderer->begin();
 
 	// draw your stuff here!
-	static float aspect = 16.f / 9.f;
-	aie::Gizmos::draw2D(glm::ortho<float>(-100, 100, -100 / aspect, 100 / aspect, -1.f, 1.f));
+	
 	// output some text, uses the last used colour
 	m_2dRenderer->drawText(m_font, "Press ESC to quit", 0, 0);
 
