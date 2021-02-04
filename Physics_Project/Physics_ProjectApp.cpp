@@ -26,7 +26,8 @@ bool Physics_ProjectApp::startup()
 
 	// TODO: remember to change this when redistributing a build!
 	// the following path would be used instead: "./font/consolas.ttf"
-	m_font = new aie::Font("../bin/font/ComicSansMS3.ttf", 100);
+	m_font = new aie::Font("../bin/font/ComicSansMS3.ttf", 100
+	);
 
 
 	m_physicsScene = new PhysicsScene();
