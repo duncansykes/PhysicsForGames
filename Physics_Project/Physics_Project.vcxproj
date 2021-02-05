@@ -167,6 +167,7 @@
     <ClCompile Include="PhysicsScene.cpp" />
     <ClCompile Include="Physics_ProjectApp.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Rigidbody.cpp" />
     <ClCompile Include="Sphere.cpp" />
   </ItemGroup>
@@ -174,6 +175,7 @@
     <ClInclude Include="PhysicsObject.h" />
     <ClInclude Include="PhysicsScene.h" />
     <ClInclude Include="Physics_ProjectApp.h" />
+    <ClInclude Include="Plane.h" />
     <ClInclude Include="Rigidbody.h" />
     <ClInclude Include="Sphere.h" />
   </ItemGroup>

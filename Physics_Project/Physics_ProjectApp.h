@@ -20,7 +20,8 @@ public:
 protected:
 
 	aie::Renderer2D*	m_2dRenderer;
+	float posX;
+	float posY;
 	aie::Font*			m_font;
-
 	PhysicsScene* m_physicsScene;
 };
