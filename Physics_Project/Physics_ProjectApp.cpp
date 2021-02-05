@@ -41,9 +41,9 @@ bool Physics_ProjectApp::startup()
 	m_physicsScene->setTimeStep(0.01f);
 
 	Sphere* ball;
-	ball = new Sphere(glm::vec2(-40, 40), glm::vec2(0, -40),  3.f, 1, glm::vec4(1, 0, 0, 1));
+	ball = new Sphere(glm::vec2(-40, 20), glm::vec2(20, 10),  4.f, 1, glm::vec4(1, 0, 0, 1));
 	Sphere* ball2;
-	ball2 = new Sphere(glm::vec2(40, 40), glm::vec2(0, -40), 3.f , 1, glm::vec4(1, 0, 0, 1));
+	ball2 = new Sphere(glm::vec2(40, 30), glm::vec2(-20, 10), 3.f , 2, glm::vec4(0, 0, 1, 1));
 
 	//ball->ApplyForce(glm::vec2(15, 3));
 
@@ -75,9 +75,14 @@ void Physics_ProjectApp::update(float deltaTime)
 	// input example
 	aie::Input* input = aie::Input::getInstance();
 	
-	aie::Gizmos::clear();
+	if (input->isKeyDown(aie::INPUT_KEY_0))
+	{
+		aie::Gizmos::clear();
+	}
 	m_physicsScene->update(deltaTime);
+
 	
+
 	m_physicsScene->draw();
 
 	

@@ -23,8 +23,7 @@ public:
 	float GetMass() { return m_mass; }
 	float GetRotation() { return m_rotation; }
 
-	
-
+	void ResolveCollision(Rigidbody* a_otherActor);
 protected:
 	glm::vec2 m_position;
 	glm::vec2 m_velocity;
