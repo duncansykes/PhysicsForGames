@@ -1,6 +1,8 @@
 #pragma once
 #include <glm/glm.hpp>
 #include <vector>
+#include "Vector2.h"
+#include "Vector4.h"
 
 class PhysicsObject;
 
@@ -11,7 +13,6 @@ public:
 	PhysicsScene();
 	~PhysicsScene();
 
-
 	void addActor(PhysicsObject* a_actor);
 	void removeActor(PhysicsObject* a_actor);
 
@@ -19,8 +20,8 @@ public:
 	void draw();
 	void DebugScene();
 
-	void setGravity(const glm::vec2 a_gravity) { m_gravity = a_gravity; }
-	glm::vec2 GetGravity() { return m_gravity; }
+	void setGravity(const mathfs::Vector2 a_gravity) { m_gravity = a_gravity; }
+	mathfs::Vector2 GetGravity() { return m_gravity; }
 
 	void setTimeStep(const float a_timeStep) { m_timeStep = a_timeStep; }
 	float getTimeStep() { return m_timeStep; }
@@ -32,13 +33,10 @@ public:
 	static bool Sphere2Plane(PhysicsObject*, PhysicsObject*);
 	static bool Sphere2Sphere(PhysicsObject*, PhysicsObject*);
 
-
-
 protected:
 
-	glm::vec2 m_gravity;
+	mathfs::Vector2 m_gravity;
 	float m_timeStep;
 
 	std::vector<PhysicsObject*> m_actors;
 };
-

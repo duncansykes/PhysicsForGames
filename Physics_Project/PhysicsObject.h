@@ -1,6 +1,7 @@
 #pragma once
 #include <glm/glm.hpp>
-
+#include "Vector2.h"
+#include "Vector4.h"
 // This is a pure abstract class. It will be used as a
 // base for the derived classes that will use FixedUpdate.
 
@@ -15,10 +16,10 @@ class PhysicsObject
 {
 public:
 
-	virtual void FixedUpdate(glm::vec2 a_gravity, float a_timeStep) = 0;
+	virtual void FixedUpdate(mathfs::Vector2 a_gravity, float a_timeStep) = 0;
 	virtual void MakeGizmo() = 0;
 	virtual void resetPosition() {}
-	
+
 	virtual void Debug() = 0;
 
 	ShapeType getShapeID() { return m_shapeID; }
@@ -28,7 +29,4 @@ protected:
 	ShapeType m_shapeID;
 
 	PhysicsObject(ShapeType a_shapeID) :m_shapeID(a_shapeID) {}
-		
-
 };
-

@@ -6,7 +6,6 @@
 #include <iostream>
 #include <list>
 
-
 typedef bool (*fn)(PhysicsObject*, PhysicsObject*);
 
 static fn collisionFunctionArray[] =
@@ -15,9 +14,8 @@ static fn collisionFunctionArray[] =
 	PhysicsScene::Sphere2Plane, PhysicsScene::Sphere2Sphere,
 };
 
-PhysicsScene::PhysicsScene() : m_timeStep(0.01f), m_gravity(glm::vec2(0,0))
+PhysicsScene::PhysicsScene() : m_timeStep(0.01f), m_gravity(mathfs::Vector2(0, 0))
 {
-
 }
 
 PhysicsScene::~PhysicsScene()
@@ -46,7 +44,6 @@ void PhysicsScene::removeActor(PhysicsObject* a_actor)
 
 void PhysicsScene::update(float deltaTime)
 {
-	
 	static float accumulatedTime = 0.f;
 	accumulatedTime += deltaTime;
 
@@ -58,11 +55,9 @@ void PhysicsScene::update(float deltaTime)
 		}
 
 		accumulatedTime -= m_timeStep;
-		
-		CheckForCollision();
-		
-	}
 
+		CheckForCollision();
+	}
 }
 
 void PhysicsScene::draw()
@@ -71,7 +66,6 @@ void PhysicsScene::draw()
 	{
 		pActor->MakeGizmo();
 	}
-
 }
 
 void PhysicsScene::DebugScene()
@@ -88,7 +82,7 @@ void PhysicsScene::DebugScene()
 void PhysicsScene::CheckForCollision()
 {
 	int actorCount = m_actors.size();
-	// 
+	//
 
 	for (int outer = 0; outer < actorCount; outer++)
 	{
@@ -106,7 +100,6 @@ void PhysicsScene::CheckForCollision()
 			{
 				collisionFunctPointer(objOuter, objInner);
 			}
-
 		}
 	}
 }
@@ -118,27 +111,31 @@ bool PhysicsScene::Plane2Plane(PhysicsObject*, PhysicsObject*)
 
 bool PhysicsScene::Plane2Sphere(PhysicsObject* objPlane, PhysicsObject* objSphere)
 {
-	return Sphere2Plane(objSphere,objPlane);
+	return Sphere2Plane(objSphere, objPlane);
 }
 
-bool PhysicsScene::Sphere2Plane(PhysicsObject*objSphere, PhysicsObject*objPlane)
+bool PhysicsScene::Sphere2Plane(PhysicsObject* objSphere, PhysicsObject* objPlane)
 {
-
 	Sphere* sphere = dynamic_cast<Sphere*>(objSphere);
 	Plane* plane = dynamic_cast<Plane*>(objPlane);
+
+    
+
 
 	// If these have a value, continue below
 	if (sphere != nullptr && plane != nullptr)
 	{
-		glm::vec2 CollisionNormal = plane->GetNormal();
-		float sphereToPlane = glm::dot(sphere->GetPosition(), CollisionNormal - plane->GetDistance());
+		mathfs::Vector2 CollisionNormal = plane->GetNormal();
+		float sphereToPlane = mathfs::extra::dot(sphere->GetPosition(), CollisionNormal - plane->GetDistance());
 		float intersection = sphere->GetRadius() - sphereToPlane;
 
-		float velocityOutOfPlane = glm::dot(sphere->GetVelocity(), CollisionNormal);
+		float velocityOutOfPlane = mathfs::extra::dot(sphere->GetVelocity(), CollisionNormal);
 		if (intersection > 0 && velocityOutOfPlane < 0)
 		{
-			sphere->ApplyForce(-sphere->GetVelocity() * sphere->GetMass() * 2.f);
-			
+			mathfs::Vector2 a(-sphere->GetVelocity().x, -sphere->GetVelocity().y);
+
+			sphere->ApplyForce(a * sphere->GetMass() * 2.f);
+
 			return true;
 		}
 	}
@@ -146,27 +143,23 @@ bool PhysicsScene::Sphere2Plane(PhysicsObject*objSphere, PhysicsObject*objPlane)
 	return false;
 }
 
-bool PhysicsScene::Sphere2Sphere(PhysicsObject*obj1, PhysicsObject*obj2)
+bool PhysicsScene::Sphere2Sphere(PhysicsObject* obj1, PhysicsObject* obj2)
 {
 	Sphere* sphere1 = dynamic_cast<Sphere*>(obj1);
 	Sphere* sphere2 = dynamic_cast<Sphere*>(obj2);
 
-
 	if (sphere1 != nullptr && sphere2 != nullptr)
 	{
-
-		float dist = glm::distance(sphere1->GetPosition(), sphere2->GetPosition());
+		float dist = mathfs::extra::dist(sphere1->GetPosition(), sphere2->GetPosition());
 
 		float penetration = sphere1->GetRadius() + sphere2->GetRadius() - dist;
 		if (penetration > 0)
 		{
+			
 			sphere1->ResolveCollision(sphere2);
 			return true;
 		}
-
-
 	}
-
 
 	return false;
 }

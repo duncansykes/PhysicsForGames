@@ -1,5 +1,6 @@
 #pragma once
-
+#include "Vector2.h"
+#include "Vector4.h"
 #include "Application.h"
 #include "Renderer2D.h"
 
@@ -19,9 +20,10 @@ public:
 
 protected:
 
-	aie::Renderer2D*	m_2dRenderer;
+	aie::Renderer2D* m_2dRenderer;
 	float posX;
 	float posY;
-	aie::Font*			m_font;
+	
+	aie::Font* m_font;
 	PhysicsScene* m_physicsScene;
 };

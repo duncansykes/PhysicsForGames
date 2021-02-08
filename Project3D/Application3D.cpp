@@ -10,15 +10,12 @@ using glm::mat4;
 using aie::Gizmos;
 
 Application3D::Application3D() {
-
 }
 
 Application3D::~Application3D() {
-
 }
 
 bool Application3D::startup() {
-	
 	setBackgroundColour(0.25f, 0.25f, 0.25f);
 
 	// initialise gizmo primitive counts
@@ -27,25 +24,23 @@ bool Application3D::startup() {
 	// create simple camera transforms
 	m_viewMatrix = glm::lookAt(vec3(10), vec3(0), vec3(0, 1, 0));
 	m_projectionMatrix = glm::perspective(glm::pi<float>() * 0.25f,
-										  getWindowWidth() / (float)getWindowHeight(),
-										  0.1f, 1000.f);
+		getWindowWidth() / (float)getWindowHeight(),
+		0.1f, 1000.f);
 
 	return true;
 }
 
 void Application3D::shutdown() {
-
 	Gizmos::destroy();
 }
 
 void Application3D::update(float deltaTime) {
-
 	// query time since application started
 	float time = getTime();
 
 	// rotate camera
 	m_viewMatrix = glm::lookAt(vec3(glm::sin(time) * 10, 10, glm::cos(time) * 10),
-							   vec3(0), vec3(0, 1, 0));
+		vec3(0), vec3(0, 1, 0));
 
 	// wipe the gizmos clean for this frame
 	Gizmos::clear();
@@ -55,11 +50,11 @@ void Application3D::update(float deltaTime) {
 	vec4 black(0, 0, 0, 1);
 	for (int i = 0; i < 21; ++i) {
 		Gizmos::addLine(vec3(-10 + i, 0, 10),
-						vec3(-10 + i, 0, -10),
-						i == 10 ? white : black);
+			vec3(-10 + i, 0, -10),
+			i == 10 ? white : black);
 		Gizmos::addLine(vec3(10, 0, -10 + i),
-						vec3(-10, 0, -10 + i),
-						i == 10 ? white : black);
+			vec3(-10, 0, -10 + i),
+			i == 10 ? white : black);
 	}
 
 	// add a transform so that we can see the axis
@@ -78,8 +73,8 @@ void Application3D::update(float deltaTime) {
 
 	// demonstrate 2D gizmos
 	Gizmos::add2DAABB(glm::vec2(getWindowWidth() / 2, 100),
-					  glm::vec2(getWindowWidth() / 2 * (fmod(getTime(), 3.f) / 3), 20),
-					  vec4(0, 1, 1, 1));
+		glm::vec2(getWindowWidth() / 2 * (fmod(getTime(), 3.f) / 3), 20),
+		vec4(0, 1, 1, 1));
 
 	// quit if we press escape
 	aie::Input* input = aie::Input::getInstance();
@@ -89,14 +84,13 @@ void Application3D::update(float deltaTime) {
 }
 
 void Application3D::draw() {
-
 	// wipe the screen to the background colour
 	clearScreen();
 
 	// update perspective in case window resized
 	m_projectionMatrix = glm::perspective(glm::pi<float>() * 0.25f,
-										  getWindowWidth() / (float)getWindowHeight(),
-										  0.1f, 1000.f);
+		getWindowWidth() / (float)getWindowHeight(),
+		0.1f, 1000.f);
 
 	// draw 3D gizmos
 	Gizmos::draw(m_projectionMatrix * m_viewMatrix);
