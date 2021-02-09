@@ -22,8 +22,26 @@ PhysicsScene::~PhysicsScene()
 {
 	for (auto pActor : m_actors)
 	{
+		
 		delete pActor;
 	}
+}
+
+
+void PhysicsScene::ForceDelete()
+{
+
+	for (auto p : m_actors)
+	{		
+		if (p->getShapeID() == SPHERE)
+		{
+			auto it = std::find(m_actors.begin(), m_actors.end(),p);
+			m_actors.erase(it);
+			return;
+		}
+
+	}
+
 }
 
 void PhysicsScene::addActor(PhysicsObject* a_actor)
@@ -98,8 +116,11 @@ void PhysicsScene::CheckForCollision()
 			fn collisionFunctPointer = collisionFunctionArray[functionIdx];
 			if (collisionFunctPointer != nullptr)
 			{
+				
 				collisionFunctPointer(objOuter, objInner);
+				
 			}
+			
 		}
 	}
 }
@@ -136,9 +157,9 @@ bool PhysicsScene::Sphere2Plane(PhysicsObject* objSphere, PhysicsObject* objPlan
 		if (intersection > 0 && velocityOutOfPlane < 0)
 		{
 			mathfs::Vector2 a(-sphere->GetVelocity().x, -sphere->GetVelocity().y);
-
+			
 			sphere->ApplyForce(a * sphere->GetMass() * 2.f);
-
+			//objSphere->resetPosition();
 			return true;
 		}
 	}

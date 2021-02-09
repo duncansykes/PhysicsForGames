@@ -11,8 +11,6 @@ Sphere::Sphere(mathfs::Vector2 a_position, mathfs::Vector2 a_velocity, float a_r
 
 void Sphere::MakeGizmo()
 {
-
-
 	aie::Gizmos::add2DCircle(GetPosition().vectorToglm(), m_radius, 12, GetColor().vectortoglm());
 }
 

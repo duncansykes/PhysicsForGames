@@ -14,6 +14,8 @@ public:
 	PhysicsScene();
 	~PhysicsScene();
 
+	void ForceDelete();
+
 	void addActor(PhysicsObject* a_actor);
 	void removeActor(PhysicsObject* a_actor);
 

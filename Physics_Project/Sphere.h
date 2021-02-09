@@ -9,6 +9,8 @@ public:
 		float a_radius, float a_mass, mathfs::Vector4 a_color);
 	~Sphere() {};
 
+	virtual void resetPosition() { m_position = mathfs::Vector2(0, 0); }
+
 	virtual void MakeGizmo();
 	bool CheckCollision(PhysicsObject* pOther);
 
