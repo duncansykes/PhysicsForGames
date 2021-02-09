@@ -52,7 +52,7 @@ namespace mathfs
 			temp.z = z / a.z;
 			return temp;
 		}
-		Vector3 operator+=(const Vector3& a)
+		Vector3& operator+=(const Vector3& a)
 		{
 			this->x += a.x;
 			this->y += a.y;
@@ -97,6 +97,46 @@ namespace mathfs
 			this->x += a.x;
 			this->y += a.y;
 			this->z += a.z;
+			return *this;
+		}
+
+		Vector3 operator+(const float& a)
+		{
+			Vector3 temp;
+			temp.x = x + a;
+			temp.y = y + a;
+			temp.z = z + a;
+			return temp;
+		}
+		Vector3 operator-(const float& a)
+		{
+			Vector3 temp;
+			temp.x = x - a;
+			temp.y = y - a;
+			temp.z = z - a;
+			return temp;
+		}
+		Vector3 operator*(const float& a)
+		{
+			Vector3 temp;
+			temp.x = x;
+			temp.y = y;
+			temp.z = z;
+			return temp;
+		}
+		Vector3 operator/(const float& a)
+		{
+			Vector3 temp;
+			temp.x = x;
+			temp.y = y;
+			temp.z = z;
+			return temp;
+		}
+		Vector3& operator+=(const float& a)
+		{
+			this->x += a;
+			this->y += a;
+			this->z += a;
 			return *this;
 		}
 

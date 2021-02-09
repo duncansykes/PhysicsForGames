@@ -45,12 +45,11 @@ void Rigidbody::ResolveCollision(Rigidbody* a_otherActor)
 
 	float elasticity = 1.f;
 
-	float a = glm::dot(glm::vec2(relativeVelocity.x, relativeVelocity.y) * -(1.f + elasticity), glm::vec2(normal.x, normal.y) / ((1.f / GetMass()) + (1 / a_otherActor->GetMass())));
 
-	/*float j = mathfs::extra::dot( (relativeVelocity) * -(1.f + elasticity), normal) /
-		((1.f / GetMass()) + (1 / a_otherActor->GetMass()));*/
+	float j = mathfs::extra::dot( (relativeVelocity) * -(1.f + elasticity), normal) /
+		((1.f / GetMass()) + (1 / a_otherActor->GetMass()));
 
-	mathfs::Vector2 impulse = normal * a;
+	mathfs::Vector2 impulse = normal * j;
 	ApplyForceToOther(a_otherActor, impulse);
 
 }

@@ -9,8 +9,6 @@
 #include "Plane.h"
 #include <iostream>
 
-
-
 Physics_ProjectApp::Physics_ProjectApp()
 {
 }
@@ -31,7 +29,7 @@ bool Physics_ProjectApp::startup()
 	);
 
 	m_physicsScene = new PhysicsScene();
-	m_physicsScene->setGravity(mathfs::Vector2(0, -10));
+	m_physicsScene->setGravity(mathfs::Vector2(0, -30));
 
 	// Lower the value, the more accurate the simulation
 	// but it will increase the processing time required. If it
@@ -40,9 +38,15 @@ bool Physics_ProjectApp::startup()
 	m_physicsScene->setTimeStep(0.01f);
 
 	Sphere* ball;
-	ball = new Sphere(mathfs::Vector2(-40, 20), mathfs::Vector2(20, 10), 4.f, 1, mathfs::Vector4(1, 0, 0, 1));
+	ball = new Sphere(mathfs::Vector2(-40, 20), mathfs::Vector2(20, 10), 1.f, 4, mathfs::Vector4(1, 0, 0, 1));
 	Sphere* ball2;
-	ball2 = new Sphere(mathfs::Vector2(40, 30), mathfs::Vector2(-20, 10), 3.f, 2, mathfs::Vector4(0, 0, 1, 1));
+	ball2 = new Sphere(mathfs::Vector2(40, 30), mathfs::Vector2(-20, 10), 1.f, 4, mathfs::Vector4(0, 0, 1, 1));
+	Sphere* ball3;
+	ball3 = new Sphere(mathfs::Vector2(50, 30), mathfs::Vector2(-20, 10), 1.f, 4, mathfs::Vector4(0, 1, 1, 1));
+	Sphere* ball4;
+	ball4 = new Sphere(mathfs::Vector2(20, 30), mathfs::Vector2(-20, 10), 1.f, 4, mathfs::Vector4(0, 1, 0, 1));
+
+
 
 	//ball->ApplyForce(glm::vec2(15, 3));
 
@@ -50,6 +54,8 @@ bool Physics_ProjectApp::startup()
 
 	m_physicsScene->addActor(ball);
 	m_physicsScene->addActor(ball2);
+	m_physicsScene->addActor(ball3);
+	m_physicsScene->addActor(ball4);
 
 	Plane* plane = new Plane();
 	m_physicsScene->addActor(plane);
@@ -66,19 +72,37 @@ void Physics_ProjectApp::shutdown()
 
 void Physics_ProjectApp::update(float deltaTime)
 {
+	Sphere* ball;
 	// input example
 	aie::Input* input = aie::Input::getInstance();
 
-	
-	mathfs::Vector4 vec(1, 2, 4, 5);
-	glm::vec4 vec2(2, 2, 2, 2);
+	if (input->wasKeyPressed(aie::INPUT_KEY_SPACE))
+	{
+		int ran = rand() % 3 + 1;
 
-	mathfs::Vector4 vec3 = vec + vec2;
+		
+		if (ran == 1)
+		{
+			ball = new Sphere(mathfs::Vector2(-40, 20), mathfs::Vector2(20, 10), 1.f, 4, mathfs::Vector4(1, 0, 0, 1));
+			m_physicsScene->addActor(ball);
+		}
+		if (ran == 2)
+		{
+			ball = new Sphere(mathfs::Vector2(-40, 20), mathfs::Vector2(20, 10), 1.f, 4, mathfs::Vector4(0, 1, 0, 1));
+			m_physicsScene->addActor(ball);
+		}
+		if (ran == 3)
+		{
+			ball = new Sphere(mathfs::Vector2(-40, 20), mathfs::Vector2(20, 10), 1.f, 4, mathfs::Vector4(0, 0, 1, 1));
+			m_physicsScene->addActor(ball);
+		}
 
+		
+	}
 	
 
 	aie::Gizmos::clear();
-	
+
 	m_physicsScene->update(deltaTime);
 
 	m_physicsScene->draw();

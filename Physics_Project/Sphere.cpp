@@ -12,10 +12,8 @@ Sphere::Sphere(mathfs::Vector2 a_position, mathfs::Vector2 a_velocity, float a_r
 void Sphere::MakeGizmo()
 {
 
-	glm::vec2 pos(m_position.x, m_position.y);
-	glm::vec4 col(m_color.x, m_color.y, m_color.z, m_color.w);
 
-	aie::Gizmos::add2DCircle(pos, m_radius, 12, col);
+	aie::Gizmos::add2DCircle(GetPosition().vectorToglm(), m_radius, 12, GetColor().vectortoglm());
 }
 
 bool Sphere::CheckCollision(PhysicsObject* pOther)

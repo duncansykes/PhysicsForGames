@@ -155,14 +155,10 @@ bool PhysicsScene::Sphere2Sphere(PhysicsObject* obj1, PhysicsObject* obj2)
 	if (sphere1 != nullptr && sphere2 != nullptr)
 	{
 
-		float distance = glm::distance(sphere1->GetPosition().vectorToglm(), sphere2->GetPosition().vectorToglm());
-
-	
-
+		float distance = mathfs::extra::distance(sphere1->GetPosition(), sphere2->GetPosition());
 		float penetration = sphere1->GetRadius() + sphere2->GetRadius() - distance;
 		if (penetration > 0)
 		{
-			
 			sphere1->ResolveCollision(sphere2);
 			return true;
 		}

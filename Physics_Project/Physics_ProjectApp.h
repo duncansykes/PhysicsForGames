@@ -6,7 +6,8 @@
 
 #include "PhysicsScene.h"
 
-class Physics_ProjectApp : public aie::Application {
+class Physics_ProjectApp : public aie::Application
+{
 public:
 
 	Physics_ProjectApp();
@@ -23,7 +24,7 @@ protected:
 	aie::Renderer2D* m_2dRenderer;
 	float posX;
 	float posY;
-	
+
 	aie::Font* m_font;
 	PhysicsScene* m_physicsScene;
 };

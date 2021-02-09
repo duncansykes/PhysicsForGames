@@ -115,6 +115,51 @@ namespace mathfs
 			return *this;
 		}
 
+		Vector4 operator+(const float& a)
+		{
+			Vector4 temp;
+			temp.x = x + a;
+			temp.y = y + a;
+			temp.z = z + a;
+			temp.w = w + a;
+			return temp;
+		}
+		Vector4 operator-(const float& a)
+		{
+			Vector4 temp;
+			temp.x = x - a;
+			temp.y = y - a;
+			temp.z = z - a;
+			temp.y = w - a;
+			return temp;
+		}
+		Vector4 operator*(const float& a)
+		{
+			Vector4 temp;
+			temp.x = x * a;
+			temp.y = y * a;
+			temp.z = z * a;
+			temp.y = w * a;
+			return temp;
+		}
+		Vector4 operator/(const float& a)
+		{
+			Vector4 temp;
+			temp.x = x / a;
+			temp.y = y / a;
+			temp.z = z / a;
+			temp.y = w / a;
+			return temp;
+		}
+		Vector4& operator+=(const float& a)
+		{
+			this->x += a;
+			this->y += a;
+			this->z += a;
+			this->w += a;
+			return *this;
+		}
+
 		Vector4 Normalize();
 		float Magnitude();
 

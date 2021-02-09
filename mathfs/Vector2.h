@@ -129,6 +129,13 @@ namespace mathfs
 			temp.y = y / a;
 			return temp;
 		}
+		Vector2& operator+=(const float& a)
+		{
+			this->x += a;
+			this->y += a;
+
+			return *this;
+		}
 
 		Vector2 Normalize();
 		float Magnitude();
