@@ -4,13 +4,13 @@
 #include "Input.h"
 #include <random>
 #include "glm\ext.hpp"
-
-
-
-
 #include "Sphere.h"
 #include <Gizmos.h>
 #include "Plane.h"
+#include <iostream>
+
+
+
 Physics_ProjectApp::Physics_ProjectApp()
 {
 }
@@ -70,6 +70,13 @@ void Physics_ProjectApp::update(float deltaTime)
 	aie::Input* input = aie::Input::getInstance();
 
 	
+	mathfs::Vector4 vec(1, 2, 4, 5);
+	glm::vec4 vec2(2, 2, 2, 2);
+
+	mathfs::Vector4 vec3 = vec + vec2;
+
+	
+
 	aie::Gizmos::clear();
 	
 	m_physicsScene->update(deltaTime);

@@ -156,6 +156,7 @@
     <ClCompile Include="Vector4.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="funct.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="operations.h" />
     <ClInclude Include="Vector2.h" />

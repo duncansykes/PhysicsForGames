@@ -1,4 +1,5 @@
 #include "Sphere.h"
+
 #include <Gizmos.h>
 
 Sphere::Sphere(mathfs::Vector2 a_position, mathfs::Vector2 a_velocity, float a_radius, float a_mass, mathfs::Vector4 a_color)
@@ -25,7 +26,7 @@ bool Sphere::CheckCollision(PhysicsObject* pOther)
 
 	if (pSphere != nullptr)
 	{
-		float dist = mathfs::extra::dist(GetPosition(), pSphere->GetPosition());
+		float dist = mathfs::extra::distance(GetPosition(), pSphere->GetPosition());
 		if (GetRadius() + pSphere->GetRadius() > dist)
 		{
 			return true;

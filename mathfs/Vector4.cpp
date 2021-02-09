@@ -23,49 +23,9 @@ namespace mathfs
 			(one.w + two.w));
 	}
 
-	Vector4 Vector4::Add(Vector4 one, Vector2 two)
-	{
-		
-		return Vector4(
-			(one.x + two.x),
-			(one.y + two.y),
-			(one.z),
-			(one.w));
 
-
-	}
-
-	Vector4 Vector4::Add(Vector2 one, Vector4 two)
-	{
-		return Vector4(
-			(one.x + two.x),
-			(one.y + two.y),
-			(two.z),
-			(two.w));
-	}
-
-	Vector4 Vector4::Subtract(Vector4 one, Vector4 two)
-	{
-		return Vector4(
-			(one.x - two.x),
-			(one.y - two.y),
-			(one.z - two.z),
-			(one.w - two.w));
-	}
-
-	Vector4 Vector4::Devide(Vector4 one, Vector4 two)
-	{
-		return Vector4();
-	}
-
-	Vector4 Vector4::Dot(Vector4 one, Vector4 two)
-	{
-		return Vector4(
-			(one.x * two.x),
-			(one.y * two.y),
-			(one.z * two.z),
-			(one.w * two.w));
-	}
+	
+	
 
 	Vector4 Vector4::Normalize()
 	{

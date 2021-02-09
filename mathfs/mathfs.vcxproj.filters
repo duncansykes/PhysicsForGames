@@ -50,5 +50,8 @@
     <ClInclude Include="operations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="funct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
