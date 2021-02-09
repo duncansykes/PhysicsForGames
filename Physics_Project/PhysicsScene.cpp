@@ -126,10 +126,13 @@ bool PhysicsScene::Sphere2Plane(PhysicsObject* objSphere, PhysicsObject* objPlan
 	if (sphere != nullptr && plane != nullptr)
 	{
 		mathfs::Vector2 CollisionNormal = plane->GetNormal();
+
+
 		float sphereToPlane = mathfs::extra::dot(sphere->GetPosition(), CollisionNormal - plane->GetDistance());
 		float intersection = sphere->GetRadius() - sphereToPlane;
+		 
+		float velocityOutOfPlane  = mathfs::extra::dot(sphere->GetVelocity(), CollisionNormal);
 
-		float velocityOutOfPlane = mathfs::extra::dot(sphere->GetVelocity(), CollisionNormal);
 		if (intersection > 0 && velocityOutOfPlane < 0)
 		{
 			mathfs::Vector2 a(-sphere->GetVelocity().x, -sphere->GetVelocity().y);
@@ -148,11 +151,15 @@ bool PhysicsScene::Sphere2Sphere(PhysicsObject* obj1, PhysicsObject* obj2)
 	Sphere* sphere1 = dynamic_cast<Sphere*>(obj1);
 	Sphere* sphere2 = dynamic_cast<Sphere*>(obj2);
 
+
 	if (sphere1 != nullptr && sphere2 != nullptr)
 	{
-		float dist = mathfs::extra::dist(sphere1->GetPosition(), sphere2->GetPosition());
 
-		float penetration = sphere1->GetRadius() + sphere2->GetRadius() - dist;
+		float distance = glm::distance(sphere1->GetPosition().vectorToglm(), sphere2->GetPosition().vectorToglm());
+
+	
+
+		float penetration = sphere1->GetRadius() + sphere2->GetRadius() - distance;
 		if (penetration > 0)
 		{
 			

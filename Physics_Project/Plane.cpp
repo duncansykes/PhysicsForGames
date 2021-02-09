@@ -47,12 +47,10 @@ void Plane::MakeGizmo()
 	mathfs::Vector2 start = centrePoint + (parallel * lineSegmentLen);
 	mathfs::Vector2 end = centrePoint - (parallel * lineSegmentLen);
 
-	glm::vec2 norm(GetNormal().x, GetNormal().y);
-	glm::vec2 s(start.x, start.y);
-	glm::vec2 e(end.x, end.y);
+	
 	glm::vec4 col(m_color.x, m_color.y, m_color.z, m_color.y);
 	glm::vec4 colf(colorFade.x, colorFade.y, colorFade.z, colorFade.w);
 
-	aie::Gizmos::add2DTri(s, e, s - norm * 10.f, col, col, colf);
-	aie::Gizmos::add2DTri(e, e - norm * 10.f, s - norm * 10.f, col, colf, colf);
+	aie::Gizmos::add2DTri(start.vectorToglm(), end.vectorToglm(), start.vectorToglm() - GetNormal().vectorToglm() * 10.f, col, col, colf);
+	aie::Gizmos::add2DTri(end.vectorToglm(), end.vectorToglm() - GetNormal().vectorToglm() * 10.f, start.vectorToglm() - GetNormal().vectorToglm() * 10.f, col, colf, colf);
 }
