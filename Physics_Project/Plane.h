@@ -1,10 +1,10 @@
 #pragma once
 #include "PhysicsObject.h"
-
+#include "Rigidbody.h"
 
 // This is a one sided object that extends infinitely along both its edge
 // and backwards from its normal direction.
-
+class Rigidbody;
 class Plane : public PhysicsObject
 {
 public:
@@ -17,6 +17,9 @@ public:
 	virtual void Debug();
 	virtual void resetPosition();
 	virtual void MakeGizmo();
+
+	void ResolveCollision(Rigidbody* a_otherActor, mathfs::Vector2 a_contact);
+
 
 	mathfs::Vector2 GetNormal() { return m_normal; }
 	float GetDistance() { return m_distance; }

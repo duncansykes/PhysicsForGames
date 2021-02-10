@@ -12,22 +12,23 @@ public:
 	virtual void FixedUpdate(mathfs::Vector2 a_gravity, float a_timeStep);
 	virtual void Debug() {};
 
-	void Rigidbody::ApplyForce(mathfs::Vector2 a_force);
+	void Rigidbody::ApplyForce(mathfs::Vector2 a_force, mathfs::Vector2 a_pos);
 
 
-	void ApplyForceToOther(Rigidbody* a_otherActor, mathfs::Vector2 a_force);
+	//void ApplyForceToOther(Rigidbody* a_otherActor, mathfs::Vector2 a_force);
 
-	virtual bool CheckCollision(PhysicsObject* pOther) = 0;
+	//virtual bool CheckCollision(PhysicsObject* pOther) = 0;
 
-	mathfs::Vector2 GetPosition() { return m_position; }
+	mathfs::Vector2 GetPosition() const { return m_position; }
 	mathfs::Vector2 GetVelocity() { return m_velocity; }
 
+	
 	float GetMass() { return m_mass; }
 	float GetRotation() { return m_rotation; }
 
 	float getMoment() { return m_moment; }
-
-	void Rigidbody::ResolveCollision(Rigidbody* a_otherActor);
+	float GetAngVelocity() { return m_angularVelocity; }
+	void Rigidbody::ResolveCollision(Rigidbody* a_otherActor, mathfs::Vector2 a_contact, mathfs::Vector2* a_collisionNormal = nullptr);
 
 protected:
 	mathfs::Vector2 m_position;

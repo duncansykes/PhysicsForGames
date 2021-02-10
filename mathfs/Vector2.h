@@ -24,6 +24,15 @@ namespace mathfs
 		Vector2 Add(Vector2 vector_one, Vector2 vector_two);
 		Vector2 Subtract(Vector2 vector_one, Vector2 vector_two);
 
+		
+
+		
+		Vector2 operator-() {
+			Vector2 temp;
+			temp.x = -x;
+			temp.y = -y;
+			return temp;
+		}
 		Vector2 operator+(const Vector2& a)
 		{
 			Vector2 temp;
@@ -137,6 +146,7 @@ namespace mathfs
 			return *this;
 		}
 
+		
 		Vector2 Normalize();
 		float Magnitude();
 
@@ -146,6 +156,9 @@ namespace mathfs
 
 	namespace extra
 	{
+
+		
+		
 		inline float dot(Vector2 a, Vector2 b)
 		{
 			float dtp = (a.x * b.x) + (a.y * b.y);

@@ -9,6 +9,7 @@ enum ShapeType
 {
 	PLANE = 0,
 	SPHERE,
+	BOX,
 	SHAPE_COUNT
 };
 
@@ -24,9 +25,21 @@ public:
 
 	ShapeType getShapeID() { return m_shapeID; }
 
+	void SetKinematicState(bool a_state) { m_isKinematic = a_state; }
+
+	// Keep to a max of 1 for realism
+
+	float SetElastic(float a_amount) { return m_elasticicty = a_amount; }
+	bool isKinematic() { return m_isKinematic; }
+	float getElasicity() { return m_elasticicty; }
+
+
+
 protected:
 
 	ShapeType m_shapeID;
+	bool m_isKinematic;
+	float m_elasticicty;
 
 	PhysicsObject(ShapeType a_shapeID) :m_shapeID(a_shapeID) {}
 };

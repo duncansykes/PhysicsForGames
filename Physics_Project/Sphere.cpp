@@ -7,6 +7,7 @@ Sphere::Sphere(mathfs::Vector2 a_position, mathfs::Vector2 a_velocity, float a_r
 {
 	m_radius = a_radius;
 	m_color = a_color;
+	m_moment = 1.0f / 3.0f * m_mass * a_radius;
 }
 
 void Sphere::MakeGizmo()

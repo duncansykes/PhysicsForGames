@@ -104,13 +104,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\s200490\Desktop\New folder\PhysicsForGames\temp\Bootstrap;C:\Users\s200490\Desktop\New folder\PhysicsForGames\mathfs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\s200490\Desktop\New folder\PhysicsForGames\Debug;C:\Users\s200490\Desktop\New folder\PhysicsForGames\temp\Bootstrap;C:\Users\s200490\Desktop\New folder\PhysicsForGames\mathfs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>bootstrap.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;mathfs.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\s200490\Desktop\New folder\PhysicsForGames\x64\Debug;C:\Users\s200490\Desktop\New folder\PhysicsForGames\mathfs;C:\Users\s200490\Desktop\New folder\PhysicsForGames\temp\Bootstrap\Win32\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\s200490\Desktop\New folder\PhysicsForGames\Debug;C:\Users\s200490\Desktop\New folder\PhysicsForGames\x64\Debug;C:\Users\s200490\Desktop\New folder\PhysicsForGames\mathfs;C:\Users\s200490\Desktop\New folder\PhysicsForGames\temp\Bootstrap\Win32\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -167,6 +167,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Box.cpp" />
     <ClCompile Include="PhysicsObject.cpp" />
     <ClCompile Include="PhysicsScene.cpp" />
     <ClCompile Include="Physics_ProjectApp.cpp" />
@@ -176,6 +177,7 @@
     <ClCompile Include="Sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Box.h" />
     <ClInclude Include="PhysicsObject.h" />
     <ClInclude Include="PhysicsScene.h" />
     <ClInclude Include="Physics_ProjectApp.h" />

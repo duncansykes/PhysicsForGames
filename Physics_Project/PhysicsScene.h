@@ -31,10 +31,18 @@ public:
 
 	void CheckForCollision();
 
+	static bool Plane2Box(PhysicsObject*, PhysicsObject*);
 	static bool Plane2Plane(PhysicsObject*, PhysicsObject*);
 	static bool Plane2Sphere(PhysicsObject*, PhysicsObject*);
+	
 	static bool Sphere2Plane(PhysicsObject*, PhysicsObject*);
 	static bool Sphere2Sphere(PhysicsObject*, PhysicsObject*);
+	static bool Sphere2Box(PhysicsObject*, PhysicsObject*);
+	
+	static bool Box2Plane(PhysicsObject*, PhysicsObject*);
+	static bool Box2Box(PhysicsObject*, PhysicsObject*);
+	static bool Box2Sphere(PhysicsObject*, PhysicsObject*);
+
 
 protected:
 
