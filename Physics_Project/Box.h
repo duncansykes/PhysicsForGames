@@ -30,4 +30,3 @@ protected:
 
 	glm::vec4 m_color;
 };
-

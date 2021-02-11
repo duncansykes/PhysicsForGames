@@ -12,7 +12,6 @@ Sphere::Sphere(glm::vec2 a_position, glm::vec2 a_velocity, float a_mass, float a
 
 Sphere::~Sphere()
 {
-
 }
 
 void Sphere::MakeGizmo()

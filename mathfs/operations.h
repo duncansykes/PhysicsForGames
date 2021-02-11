@@ -5,10 +5,8 @@ namespace mathfs
 	{
 	public:
 
-
 		operations() {};
 		~operations() {};
-
 
 		float inv_sqrt(float number)
 		{
@@ -43,10 +41,5 @@ namespace mathfs
 
 			return y;
 		}
-
-
-
-
 	};
 }
-

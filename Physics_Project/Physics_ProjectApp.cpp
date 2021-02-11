@@ -11,16 +11,13 @@
 
 Physics_ProjectApp::Physics_ProjectApp()
 {
-
 }
 
 Physics_ProjectApp::~Physics_ProjectApp()
 {
-
 }
 
 bool Physics_ProjectApp::startup() {
-
 	// Increases 2D line coun to maximise the number of objects we can draw.
 	aie::Gizmos::create(255U, 255U, 65535U, 65535U);
 
@@ -41,19 +38,19 @@ bool Physics_ProjectApp::startup() {
 
 	/*DrawRect();*/
 	/*SphereAndPlane();*/
-	SpringTest(10);
+	//SpringTest(10);
+
+	TriggerTest();
 
 	return true;
 }
 
 void Physics_ProjectApp::shutdown() {
-
 	delete m_font;
 	delete m_2dRenderer;
 }
 
 void Physics_ProjectApp::update(float deltaTime) {
-
 	// input example
 	aie::Input* input = aie::Input::getInstance();
 
@@ -76,11 +73,8 @@ void Physics_ProjectApp::update(float deltaTime) {
 }
 
 void Physics_ProjectApp::draw() {
-
 	// wipe the screen to the background colour
 	clearScreen();
-
-
 
 	// begin drawing sprites
 	m_2dRenderer->begin();
@@ -113,6 +107,28 @@ glm::vec2 Physics_ProjectApp::ScreenToWorld(glm::vec2 a_screenPos)
 	worldPos.y *= 2.0f * m_extents / (m_aspectRatio * getWindowHeight());
 
 	return worldPos;
+}
+
+void Physics_ProjectApp::TriggerTest()
+{
+	Sphere* ball = new Sphere(glm::vec2(-30, 0), glm::vec2(13, 0), 4, 4, glm::vec4(1, 0, 0, 1));
+
+	Sphere* ball2 = new Sphere(glm::vec2(0, -20), glm::vec2(0), 4, 4, glm::vec4(0, 0.5, 0.5, 1));
+
+	ball2->SetKinematic(true);
+	ball2->SetTrigger(true);
+
+	m_physicsScene->addActor(ball);
+	m_physicsScene->addActor(ball2);
+	m_physicsScene->addActor(new Plane(glm::vec2(0, 1), -30));
+	m_physicsScene->addActor(new Plane(glm::vec2(1, 0), -50));
+	m_physicsScene->addActor(new Plane(glm::vec2(-1, 0), -50));
+	m_physicsScene->addActor(new Box(glm::vec2(20, 10), glm::vec2(3, 0), 0.5f, 4, 8, 4));
+	m_physicsScene->addActor(new Box(glm::vec2(-45, 10), glm::vec2(3, 0), 0.5f, 4, 8, 4));
+
+	ball2->triggerEnter = [=](PhysicsObject* other) {std::cout << "Entered: " << other << std::endl; };
+
+	ball2->triggerExit =  [=](PhysicsObject* other) {std::cout << "Exited : " << other << std::endl; };
 }
 
 void Physics_ProjectApp::DrawRect()
@@ -178,6 +194,8 @@ void Physics_ProjectApp::SpringTest(int a_amount)
 	}
 
 	Box* box = new Box(glm::vec2(0, -20), glm::vec2(0), 0.3f, 20, 8, 2);
+	Box* box2 = new Box(glm::vec2(-5, 15), glm::vec2(50, 0), 0.3f, 20, 8, 2);
+	m_physicsScene->addActor(box2);
 	box->SetKinematic(true);
 	m_physicsScene->addActor(box);
 }

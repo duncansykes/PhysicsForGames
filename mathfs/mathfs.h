@@ -275,7 +275,7 @@ namespace mathfs {
 	{
 		this->i = i; this->j = j;
 	}
-	
+
 	template <typename T>
 	tVector2<T> tVector2<T>::operator +(const tVector2& v2) const
 	{
@@ -449,7 +449,6 @@ namespace mathfs {
 		return tVector4(f * i, f * j, f * k, f * w);
 	}
 
-
 	template<typename T>
 	inline float tVector4<T>::operator*(const tVector4<T>& v4) const
 	{
@@ -598,7 +597,6 @@ namespace mathfs {
 		i3 = 0;     j3 = 0;      k3 = 1;
 	}
 
-	
 	template <typename T>
 	tMatrix3<T> tMatrix3<T>::operator +(const tMatrix3<T>& m3) const
 	{

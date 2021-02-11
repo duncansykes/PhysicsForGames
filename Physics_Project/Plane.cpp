@@ -20,12 +20,10 @@ Plane::Plane() : PhysicsObject(PLANE)
 
 Plane::~Plane()
 {
-
 }
 
 void Plane::FixedUpdate(glm::vec2 a_gravity, float a_timeStep)
 {
-
 }
 
 void Plane::MakeGizmo()

@@ -19,7 +19,6 @@ Box::Box(glm::vec2 a_position, glm::vec2 a_velocity, float a_rotation, float a_m
 
 Box::~Box()
 {
-
 }
 
 void Box::FixedUpdate(glm::vec2 a_gravity, float a_timeStep)
@@ -63,7 +62,6 @@ bool Box::CheckBoxCorners(const Box& a_box, glm::vec2& a_contact, int& a_numCont
 
 			// Get the position in our box's space
 			glm::vec2 boxPos(glm::dot(pos - m_position, m_localX), glm::dot(pos - m_position, m_localY));
-
 
 			// Update the extents in each cardinal direction of our box's space
 			// Extents along the separating axes

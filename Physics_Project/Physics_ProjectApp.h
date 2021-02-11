@@ -19,6 +19,7 @@ public:
 
 	glm::vec2 ScreenToWorld(glm::vec2 a_screenPos);
 
+	void TriggerTest();
 	void DrawRect();
 	void SphereAndPlane();
 	void SpringTest(int a_amount);

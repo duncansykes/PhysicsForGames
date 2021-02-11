@@ -50,6 +50,4 @@ protected:
 	float m_timeStep;
 
 	std::vector<PhysicsObject*> m_actors;
-
 };
-

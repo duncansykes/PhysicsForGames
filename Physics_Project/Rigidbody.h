@@ -43,6 +43,9 @@ public:
 protected:
 	bool m_isTrigger;
 
+	std::list<PhysicsObject*> m_objectInside;
+	std::list<PhysicsObject*> m_objectInsideThisFrame;
+
 	glm::vec2 m_position;
 	glm::vec2 m_velocity;
 
@@ -58,4 +61,3 @@ protected:
 	glm::vec2 m_localX;
 	glm::vec2 m_localY;
 };
-

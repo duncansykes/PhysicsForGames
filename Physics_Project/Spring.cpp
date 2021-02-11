@@ -20,7 +20,6 @@ Spring::Spring(Rigidbody* a_actor1, Rigidbody* a_actor2, float a_damping, float 
 
 Spring::~Spring()
 {
-
 }
 
 void Spring::FixedUpdate(glm::vec2 a_gravity, float a_timeStep)

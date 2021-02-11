@@ -30,4 +30,3 @@ protected:
 	float m_distanceToOrigin;
 	glm::vec4 m_colour;
 };
-

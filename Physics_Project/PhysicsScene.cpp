@@ -8,7 +8,7 @@
 #include <list>
 #include <iostream>
 
-// Function pointer array for handling our collisions 
+// Function pointer array for handling our collisions
 typedef bool(*fn)(PhysicsObject*, PhysicsObject*);
 
 static fn collisionFunctionArray[] =
@@ -99,7 +99,7 @@ void PhysicsScene::CheckForCollision()
 			int shapeID_out = objOuter->GetShapeID();
 			int shapeID_in = objInner->GetShapeID();
 
-			// This will check to ensure we do not the 
+			// This will check to ensure we do not the
 			if (shapeID_in >= 0 && shapeID_out >= 0)
 			{
 				// Uses our function pointers (fn)
@@ -118,6 +118,11 @@ void PhysicsScene::CheckForCollision()
 
 void PhysicsScene::ApplyContactForces(Rigidbody* a_actor1, Rigidbody* a_actor2, glm::vec2 a_collisionNorm, float a_pen)
 {
+	if ((a_actor1 && a_actor1->IsTrigger()) || (a_actor2 && a_actor2->IsTrigger()))
+	{
+		return;
+	}
+
 	float body2Mass = a_actor2 ? a_actor2->GetMass() : INT_MAX;
 	float body1Factor = body2Mass / (a_actor1->GetMass() + body2Mass);
 
