@@ -1,13 +1,11 @@
 #pragma once
-#include "Vector2.h"
-#include "Vector4.h"
+
 #include "Application.h"
 #include "Renderer2D.h"
 
 #include "PhysicsScene.h"
 
-class Physics_ProjectApp : public aie::Application
-{
+class Physics_ProjectApp : public aie::Application {
 public:
 
 	Physics_ProjectApp();
@@ -19,12 +17,19 @@ public:
 	virtual void update(float deltaTime);
 	virtual void draw();
 
+	glm::vec2 ScreenToWorld(glm::vec2 a_screenPos);
+
+	void DrawRect();
+	void SphereAndPlane();
+	void SpringTest(int a_amount);
+
 protected:
 
 	aie::Renderer2D* m_2dRenderer;
-	float posX;
-	float posY;
-
 	aie::Font* m_font;
+
 	PhysicsScene* m_physicsScene;
+
+	const float m_aspectRatio = 16.0f / 9.0f;
+	const float m_extents = 100.0f;
 };

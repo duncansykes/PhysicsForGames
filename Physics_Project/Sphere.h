@@ -4,21 +4,18 @@
 class Sphere : public Rigidbody
 {
 public:
-
-	Sphere(mathfs::Vector2 a_position, mathfs::Vector2 a_velocity,
-		float a_radius, float a_mass, mathfs::Vector4 a_color);
-	~Sphere() {};
-
-	virtual void resetPosition() { m_position = mathfs::Vector2(0, 0); }
+	Sphere(glm::vec2 a_position, glm::vec2 a_velocity, float a_mass, float a_radius, glm::vec4 a_colour);
+	~Sphere();
 
 	virtual void MakeGizmo();
-	bool CheckCollision(PhysicsObject* pOther);
+	virtual bool IsInside(glm::vec2 a_point);
 
 	float GetRadius() { return m_radius; }
-	mathfs::Vector4 GetColor() { return m_color; }
+	glm::vec4 GetColour() { return m_color; }
 
 protected:
-
 	float m_radius;
-	mathfs::Vector4 m_color;
+	glm::vec4 m_color;
+
 };
+
