@@ -6,8 +6,7 @@
 
 #include <list>
 
-class Game :
-	public PhysicsScene
+class Game : public PhysicsScene
 {
 
 
