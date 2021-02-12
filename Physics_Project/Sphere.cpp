@@ -23,5 +23,3 @@ bool Sphere::IsInside(glm::vec2 a_point)
 {
 	return glm::distance(a_point, GetPosition()) <= GetRadius();
 }
-
-

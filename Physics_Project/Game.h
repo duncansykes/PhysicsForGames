@@ -8,18 +8,14 @@
 
 class Game : public PhysicsScene
 {
-
-
 public:
 
 	Game() {};
 	~Game() {};
 
-
 	void StartUp();
 	void Draw();
 	void Update();
-
 
 protected:
 
@@ -29,9 +25,6 @@ protected:
 	Sphere* m_playerBall;
 
 	Sphere* m_balls;
-
-
-
-
 };
+
 

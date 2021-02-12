@@ -15,7 +15,6 @@ public:
 	void SetID(int a_id) { m_id = a_id; }
 	int GetID() { return m_id; }
 
-
 protected:
 	float m_radius;
 	glm::vec4 m_color;
