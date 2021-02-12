@@ -2,7 +2,7 @@
 
 #include "Application.h"
 #include "Renderer2D.h"
-
+#include "Sphere.h"
 #include "PhysicsScene.h"
 
 class Physics_ProjectApp : public aie::Application {
@@ -23,6 +23,8 @@ public:
 	void DrawRect();
 	void SphereAndPlane();
 	void SpringTest(int a_amount);
+	void GameScene(int a_amount = 0);
+
 
 protected:
 
@@ -30,6 +32,16 @@ protected:
 	aie::Font* m_font;
 
 	PhysicsScene* m_physicsScene;
+	Sphere* ballTest;
+	Sphere* mouseTrigger;
+	Sphere* whiteBall;
+
+
+	glm::vec4 RED;
+	glm::vec4 GREEN;
+	glm::vec4 BLUE;
+	
+	unsigned int sphereNumber;
 
 	const float m_aspectRatio = 16.0f / 9.0f;
 	const float m_extents = 100.0f;

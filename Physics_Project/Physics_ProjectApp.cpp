@@ -1,4 +1,5 @@
 #include "Physics_ProjectApp.h"
+#include "GameObject.h"
 #include "Sphere.h"
 #include "Plane.h"
 #include "Box.h"
@@ -11,6 +12,11 @@
 
 Physics_ProjectApp::Physics_ProjectApp()
 {
+
+	RED = glm::vec4(1, 0, 0, 1);
+	GREEN = glm::vec4(0, 1, 0, 1);
+	BLUE = glm::vec4(0, 0, 1, 1);
+
 }
 
 Physics_ProjectApp::~Physics_ProjectApp()
@@ -19,7 +25,7 @@ Physics_ProjectApp::~Physics_ProjectApp()
 
 bool Physics_ProjectApp::startup() {
 	// Increases 2D line coun to maximise the number of objects we can draw.
-	aie::Gizmos::create(255U, 255U, 65535U, 65535U);
+	aie::Gizmos::create(10000U, 10000U, 65535U, 65535U);
 
 	m_2dRenderer = new aie::Renderer2D();
 
@@ -35,37 +41,39 @@ bool Physics_ProjectApp::startup() {
 	// but it will increase the processing time required.
 	// If it is too high it causes the sim to stutter and reduce stability.
 	m_physicsScene->SetTimeStep(0.01f);
-
-	/*DrawRect();*/
-	/*SphereAndPlane();*/
-	//SpringTest(10);
-
-	TriggerTest();
+	sphereNumber = 1;
+	mouseTrigger = new Sphere(glm::vec2(0), glm::vec2(0), 10, 6, BLUE);
+	m_physicsScene->addActor(mouseTrigger);
+	GameScene();
 
 	return true;
 }
+
 
 void Physics_ProjectApp::shutdown() {
 	delete m_font;
 	delete m_2dRenderer;
 }
 
-void Physics_ProjectApp::update(float deltaTime) {
+void Physics_ProjectApp::update(float deltaTime)
+{
 	// input example
 	aie::Input* input = aie::Input::getInstance();
 
 	aie::Gizmos::clear();
 
 	m_physicsScene->update(deltaTime);
+
+
+	int xScreen, yScreen;
+	input->getMouseXY(&xScreen, &yScreen);
+	glm::vec2 worldPos = ScreenToWorld(glm::vec2(xScreen, yScreen));
+	mouseTrigger->SetPosition(worldPos);
+	ballTest->triggerEnter = [=](PhysicsObject* other) { std::cout << "Entered: " << other << std::endl; };
+	ballTest->triggerExit = [=](PhysicsObject* other) { std::cout << "Entered: " << other << std::endl; };
+
 	m_physicsScene->draw();
 
-	if (input->isMouseButtonDown(0))
-	{
-		int xScreen, yScreen;
-		input->getMouseXY(&xScreen, &yScreen);
-		glm::vec2 worldPos = ScreenToWorld(glm::vec2(xScreen, yScreen));
-		aie::Gizmos::add2DCircle(worldPos, 5, 32, glm::vec4(0.7f));
-	}
 
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
@@ -82,9 +90,8 @@ void Physics_ProjectApp::draw() {
 	// If X-axis = -100 to 100, Y-axis = -56.25 to 56.25
 	aie::Gizmos::draw2D(glm::ortho<float>(-m_extents, m_extents, -m_extents / m_aspectRatio, m_extents / m_aspectRatio, -1.0f, 1.0f));
 
-	// draw your stuff here!
 	char fps[32];
-	sprintf_s(fps, 32, "FPS: %i", getFPS());
+	sprintf_s(fps, 32, "Spawned: %i", sphereNumber);
 	m_2dRenderer->drawText(m_font, fps, 0, 720 - 32);
 
 	// output some text, uses the last used colour
@@ -199,3 +206,35 @@ void Physics_ProjectApp::SpringTest(int a_amount)
 	box->SetKinematic(true);
 	m_physicsScene->addActor(box);
 }
+
+void Physics_ProjectApp::GameScene(int a_amount)
+{
+
+	int fr = 3;
+	float spacing_X = 70;
+	float spacing_Y = 40;
+	float sizeOfHole = 8;
+	for (int i = 0; i < fr; i++)
+	{
+		glm::vec2 posFinal(0, 0);
+		
+		ballTest = new Sphere(glm::vec2(-spacing_X + (i * spacing_X) + 3, -spacing_Y), glm::vec2(0), 10, sizeOfHole, RED);
+		posFinal = glm::vec2(-50 + (i * 30), -20);
+		ballTest->SetKinematic(true); ballTest->SetTrigger(true);
+		m_physicsScene->addActor(ballTest);
+	}
+	for (int i = 0; i < fr; i++)
+	{
+		glm::vec2 posFinal(0, 0);
+		ballTest = new Sphere(glm::vec2(-spacing_X + (i * spacing_X) + 3, spacing_Y), glm::vec2(0), 10, sizeOfHole, RED);
+		posFinal = glm::vec2(-50 + (i * 30), -20);
+		ballTest->SetKinematic(true); ballTest->SetTrigger(true);
+		m_physicsScene->addActor(ballTest);
+	}
+
+
+
+
+
+}
+
