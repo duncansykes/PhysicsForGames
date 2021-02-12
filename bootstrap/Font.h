@@ -1,8 +1,10 @@
 #pragma once
 
-namespace aie {
+namespace aie
+{
 	// a class that wraps up a True Type Font within an OpenGL texture
-	class Font {
+	class Font
+	{
 		friend class Renderer2D;
 
 	public:

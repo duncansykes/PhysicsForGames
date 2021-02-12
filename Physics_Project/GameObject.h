@@ -7,11 +7,8 @@
 #include "glm\ext.hpp"
 #include <string>
 
-
-
-class GameObject 
+class GameObject
 {
-
 public:
 
 	GameObject();
@@ -28,19 +25,14 @@ public:
 	std::string name(std::string name) { return m_objectName = name; }
 	std::string tag(std::string tag) { return m_tag = tag; }
 
-
-
 	std::vector<GameObject*> AllObjects;
-
 
 protected:
 
 	glm::vec2 m_position;
-	
+
 	bool isTrig;
 	bool isKinematic;
 	std::string m_objectName;
 	std::string m_tag;
-
-
 };

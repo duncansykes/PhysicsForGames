@@ -6,9 +6,11 @@
 
 struct GLFWwindow;
 
-namespace aie {
+namespace aie
+{
 	// a giant list of input codes for keyboard and mouse
-	enum EInputCodes : int {
+	enum EInputCodes : int
+	{
 		INPUT_KEY_UNKNOWN = -1,
 		INPUT_KEY_SPACE = 32,
 		INPUT_KEY_APOSTROPHE = 39,
@@ -136,7 +138,8 @@ namespace aie {
 	};
 
 	// a singleton class that manages Input from the keyboard and mouse
-	class Input {
+	class Input
+	{
 	public:
 
 		// returns access to the singleton instance

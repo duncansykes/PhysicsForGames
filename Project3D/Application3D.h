@@ -3,7 +3,8 @@
 #include "Application.h"
 #include <glm/mat4x4.hpp>
 
-class Application3D : public aie::Application {
+class Application3D : public aie::Application
+{
 public:
 
 	Application3D();

@@ -3,7 +3,6 @@
 void Game::StartUp()
 {
 	m_balls->SetID(1);
-
 }
 
 void Game::Draw()

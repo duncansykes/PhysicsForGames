@@ -2,9 +2,11 @@
 
 #include <glm/fwd.hpp>
 
-namespace aie {
+namespace aie
+{
 	// a singleton class for rendering immediate-mode 3-D primitives
-	class Gizmos {
+	class Gizmos
+	{
 	public:
 
 		static void		create(unsigned int maxLines, unsigned int maxTris,
@@ -96,17 +98,20 @@ namespace aie {
 			unsigned int max2DLines, unsigned int max2DTris);
 		~Gizmos();
 
-		struct GizmoVertex {
+		struct GizmoVertex
+		{
 			float x, y, z, w;
 			float r, g, b, a;
 		};
 
-		struct GizmoLine {
+		struct GizmoLine
+		{
 			GizmoVertex v0;
 			GizmoVertex v1;
 		};
 
-		struct GizmoTri {
+		struct GizmoTri
+		{
 			GizmoVertex v0;
 			GizmoVertex v1;
 			GizmoVertex v2;

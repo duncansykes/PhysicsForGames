@@ -112,10 +112,8 @@ void Rigidbody::ResolveCollision(Rigidbody* a_otherActor, glm::vec2 a_contact, g
 		glm::vec2 impact = (1.0f + elasticity) * mass1 * mass2 /
 			(mass1 + mass2) * (cp_velocity1 - cp_velocity2) * normal;
 
-
 		if (!m_isTrigger && !a_otherActor->IsTrigger())
 		{
-
 			ApplyForce(-impact, a_contact - m_position);
 			a_otherActor->ApplyForce(impact, a_contact - a_otherActor->GetPosition());
 
@@ -152,7 +150,8 @@ void Rigidbody::TriggerEnter(PhysicsObject* a_otherActor)
 		m_objectInside.end(), a_otherActor) == m_objectInside.end())
 	{
 		m_objectInside.push_back(a_otherActor);
-		if (triggerEnter != nullptr) {
+		if (triggerEnter != nullptr)
+		{
 			triggerEnter(a_otherActor);
 		}
 	}

@@ -1,11 +1,13 @@
 #pragma once
 
-namespace aie {
+namespace aie
+{
 	class Texture;
 	class Font;
 
 	// a class for rendering 2D sprites and font
-	class Renderer2D {
+	class Renderer2D
+	{
 	public:
 
 		Renderer2D();
@@ -73,7 +75,8 @@ namespace aie {
 
 		// sprite handling
 		enum { MAX_SPRITES = 512 };
-		struct SBVertex {
+		struct SBVertex
+		{
 			float pos[4];
 			float color[4];
 			float texcoord[2];

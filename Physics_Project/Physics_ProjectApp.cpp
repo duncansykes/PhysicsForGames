@@ -12,18 +12,17 @@
 
 Physics_ProjectApp::Physics_ProjectApp()
 {
-
 	RED = glm::vec4(1, 0, 0, 1);
 	GREEN = glm::vec4(0, 1, 0, 1);
 	BLUE = glm::vec4(0, 0, 1, 1);
-
 }
 
 Physics_ProjectApp::~Physics_ProjectApp()
 {
 }
 
-bool Physics_ProjectApp::startup() {
+bool Physics_ProjectApp::startup()
+{
 	// Increases 2D line coun to maximise the number of objects we can draw.
 	aie::Gizmos::create(10000U, 10000U, 65535U, 65535U);
 
@@ -49,8 +48,8 @@ bool Physics_ProjectApp::startup() {
 	return true;
 }
 
-
-void Physics_ProjectApp::shutdown() {
+void Physics_ProjectApp::shutdown()
+{
 	delete m_font;
 	delete m_2dRenderer;
 }
@@ -64,7 +63,6 @@ void Physics_ProjectApp::update(float deltaTime)
 
 	m_physicsScene->update(deltaTime);
 
-
 	int xScreen, yScreen;
 	input->getMouseXY(&xScreen, &yScreen);
 	glm::vec2 worldPos = ScreenToWorld(glm::vec2(xScreen, yScreen));
@@ -74,13 +72,13 @@ void Physics_ProjectApp::update(float deltaTime)
 
 	m_physicsScene->draw();
 
-
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
 		quit();
 }
 
-void Physics_ProjectApp::draw() {
+void Physics_ProjectApp::draw()
+{
 	// wipe the screen to the background colour
 	clearScreen();
 
@@ -133,9 +131,9 @@ void Physics_ProjectApp::TriggerTest()
 	m_physicsScene->addActor(new Box(glm::vec2(20, 10), glm::vec2(3, 0), 0.5f, 4, 8, 4));
 	m_physicsScene->addActor(new Box(glm::vec2(-45, 10), glm::vec2(3, 0), 0.5f, 4, 8, 4));
 
-	ball2->triggerEnter = [=](PhysicsObject* other) {std::cout << "Entered: " << other << std::endl; };
+	ball2->triggerEnter = [=](PhysicsObject* other) { std::cout << "Entered: " << other << std::endl; };
 
-	ball2->triggerExit =  [=](PhysicsObject* other) {std::cout << "Exited : " << other << std::endl; };
+	ball2->triggerExit = [=](PhysicsObject* other) { std::cout << "Exited : " << other << std::endl; };
 }
 
 void Physics_ProjectApp::DrawRect()
@@ -209,7 +207,6 @@ void Physics_ProjectApp::SpringTest(int a_amount)
 
 void Physics_ProjectApp::GameScene(int a_amount)
 {
-
 	int fr = 3;
 	float spacing_X = 70;
 	float spacing_Y = 40;
@@ -217,7 +214,7 @@ void Physics_ProjectApp::GameScene(int a_amount)
 	for (int i = 0; i < fr; i++)
 	{
 		glm::vec2 posFinal(0, 0);
-		
+
 		ballTest = new Sphere(glm::vec2(-spacing_X + (i * spacing_X) + 3, -spacing_Y), glm::vec2(0), 10, sizeOfHole, RED);
 		posFinal = glm::vec2(-50 + (i * 30), -20);
 		ballTest->SetKinematic(true); ballTest->SetTrigger(true);
@@ -231,10 +228,4 @@ void Physics_ProjectApp::GameScene(int a_amount)
 		ballTest->SetKinematic(true); ballTest->SetTrigger(true);
 		m_physicsScene->addActor(ballTest);
 	}
-
-
-
-
-
 }
-

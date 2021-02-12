@@ -4,14 +4,16 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
-namespace aie {
+namespace aie
+{
 	Texture::Texture()
 		: m_filename("none"),
 		m_width(0),
 		m_height(0),
 		m_glHandle(0),
 		m_format(0),
-		m_loadedPixels(nullptr) {
+		m_loadedPixels(nullptr)
+	{
 	}
 
 	Texture::Texture(const char* filename)
@@ -20,7 +22,8 @@ namespace aie {
 		m_height(0),
 		m_glHandle(0),
 		m_format(0),
-		m_loadedPixels(nullptr) {
+		m_loadedPixels(nullptr)
+	{
 		load(filename);
 	}
 
@@ -29,19 +32,23 @@ namespace aie {
 		m_width(width),
 		m_height(height),
 		m_format(format),
-		m_loadedPixels(nullptr) {
+		m_loadedPixels(nullptr)
+	{
 		create(width, height, format, pixels);
 	}
 
-	Texture::~Texture() {
+	Texture::~Texture()
+	{
 		if (m_glHandle != 0)
 			glDeleteTextures(1, &m_glHandle);
 		if (m_loadedPixels != nullptr)
 			stbi_image_free(m_loadedPixels);
 	}
 
-	bool Texture::load(const char* filename) {
-		if (m_glHandle != 0) {
+	bool Texture::load(const char* filename)
+	{
+		if (m_glHandle != 0)
+		{
 			glDeleteTextures(1, &m_glHandle);
 			m_glHandle = 0;
 			m_width = 0;
@@ -52,10 +59,12 @@ namespace aie {
 		int x = 0, y = 0, comp = 0;
 		m_loadedPixels = stbi_load(filename, &x, &y, &comp, STBI_default);
 
-		if (m_loadedPixels != nullptr) {
+		if (m_loadedPixels != nullptr)
+		{
 			glGenTextures(1, &m_glHandle);
 			glBindTexture(GL_TEXTURE_2D, m_glHandle);
-			switch (comp) {
+			switch (comp)
+			{
 			case STBI_grey:
 				m_format = RED;
 				glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, x, y,
@@ -90,8 +99,10 @@ namespace aie {
 		return false;
 	}
 
-	void Texture::create(unsigned int width, unsigned int height, Format format, unsigned char* pixels) {
-		if (m_glHandle != 0) {
+	void Texture::create(unsigned int width, unsigned int height, Format format, unsigned char* pixels)
+	{
+		if (m_glHandle != 0)
+		{
 			glDeleteTextures(1, &m_glHandle);
 			m_glHandle = 0;
 			m_filename = "none";
@@ -110,7 +121,8 @@ namespace aie {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-		switch (m_format) {
+		switch (m_format)
+		{
 		case RED:
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, m_width, m_height, 0, GL_RED, GL_UNSIGNED_BYTE, pixels);
 			break;
@@ -128,7 +140,8 @@ namespace aie {
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
-	void Texture::bind(unsigned int slot) const {
+	void Texture::bind(unsigned int slot) const
+	{
 		glActiveTexture(GL_TEXTURE0 + slot);
 		glBindTexture(GL_TEXTURE_2D, m_glHandle);
 	}

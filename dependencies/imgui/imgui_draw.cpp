@@ -2198,12 +2198,14 @@ static void stb__lit(unsigned char* data, unsigned int length)
 
 static unsigned char* stb_decompress_token(unsigned char* i)
 {
-	if (*i >= 0x20) { // use fewer if's for cases that expand small
+	if (*i >= 0x20)
+	{ // use fewer if's for cases that expand small
 		if (*i >= 0x80)       stb__match(stb__dout - i[1] - 1, i[0] - 0x80 + 1), i += 2;
 		else if (*i >= 0x40)  stb__match(stb__dout - (stb__in2(0) - 0x4000 + 1), i[2] + 1), i += 3;
 		else /* *i >= 0x20 */ stb__lit(i + 1, i[0] - 0x20 + 1), i += 1 + (i[0] - 0x20 + 1);
 	}
-	else { // more ifs for cases that expand large, since overhead is amortized
+	else
+	{ // more ifs for cases that expand large, since overhead is amortized
 		if (*i >= 0x18)       stb__match(stb__dout - (stb__in3(0) - 0x180000 + 1), i[3] + 1), i += 4;
 		else if (*i >= 0x10)  stb__match(stb__dout - (stb__in3(0) - 0x100000 + 1), stb__in2(3) + 1), i += 5;
 		else if (*i >= 0x08)  stb__lit(i + 2, stb__in2(0) - 0x0800 + 1), i += 2 + (stb__in2(0) - 0x0800 + 1);
@@ -2221,8 +2223,10 @@ static unsigned int stb_adler32(unsigned int adler32, unsigned char* buffer, uns
 	unsigned long blocklen, i;
 
 	blocklen = buflen % 5552;
-	while (buflen) {
-		for (i = 0; i + 7 < blocklen; i += 8) {
+	while (buflen)
+	{
+		for (i = 0; i + 7 < blocklen; i += 8)
+		{
 			s1 += buffer[0], s2 += s1;
 			s1 += buffer[1], s2 += s1;
 			s1 += buffer[2], s2 += s1;
@@ -2258,18 +2262,22 @@ static unsigned int stb_decompress(unsigned char* output, unsigned char* i, unsi
 	i += 16;
 
 	stb__dout = output;
-	for (;;) {
+	for (;;)
+	{
 		unsigned char* old_i = i;
 		i = stb_decompress_token(i);
-		if (i == old_i) {
-			if (*i == 0x05 && i[1] == 0xfa) {
+		if (i == old_i)
+		{
+			if (*i == 0x05 && i[1] == 0xfa)
+			{
 				IM_ASSERT(stb__dout == output + olen);
 				if (stb__dout != output + olen) return 0;
 				if (stb_adler32(1, output, olen) != (unsigned int)stb__in4(2))
 					return 0;
 				return olen;
 			}
-			else {
+			else
+			{
 				IM_ASSERT(0); /* NOTREACHED */
 				return 0;
 			}

@@ -1,10 +1,12 @@
 #include "Input.h"
 #include <GLFW/glfw3.h>
 
-namespace aie {
+namespace aie
+{
 	Input* Input::m_instance = nullptr;
 
-	Input::Input() {
+	Input::Input()
+	{
 		// track current/previous key and mouse button states
 		m_lastKeys = new int[GLFW_KEY_LAST + 1];
 		m_currentKeys = new int[GLFW_KEY_LAST + 1];
@@ -18,19 +20,22 @@ namespace aie {
 			m_lastButtons[i] = m_currentButtons[i] = glfwGetMouseButton(window, i);
 
 		// set up callbacks
-		auto KeyPressCallback = [](GLFWwindow* window, int key, int scancode, int action, int mods) {
+		auto KeyPressCallback = [](GLFWwindow* window, int key, int scancode, int action, int mods)
+		{
 			for (auto& f : Input::getInstance()->m_keyCallbacks)
 				f(window, key, scancode, action, mods);
 		};
 
-		auto CharacterInputCallback = [](GLFWwindow* window, unsigned int character) {
+		auto CharacterInputCallback = [](GLFWwindow* window, unsigned int character)
+		{
 			Input::getInstance()->m_pressedCharacters.push_back(character);
 
 			for (auto& f : Input::getInstance()->m_charCallbacks)
 				f(window, character);
 		};
 
-		auto MouseMoveCallback = [](GLFWwindow* window, double x, double y) {
+		auto MouseMoveCallback = [](GLFWwindow* window, double x, double y)
+		{
 			int w = 0, h = 0;
 			glfwGetWindowSize(window, &w, &h);
 
@@ -40,19 +45,22 @@ namespace aie {
 				f(window, x, h - y);
 		};
 
-		auto MouseInputCallback = [](GLFWwindow* window, int button, int action, int mods) {
+		auto MouseInputCallback = [](GLFWwindow* window, int button, int action, int mods)
+		{
 			for (auto& f : Input::getInstance()->m_mouseButtonCallbacks)
 				f(window, button, action, mods);
 		};
 
-		auto MouseScrollCallback = [](GLFWwindow* window, double xoffset, double yoffset) {
+		auto MouseScrollCallback = [](GLFWwindow* window, double xoffset, double yoffset)
+		{
 			Input::getInstance()->m_mouseScroll += yoffset;
 
 			for (auto& f : Input::getInstance()->m_mouseScrollCallbacks)
 				f(window, xoffset, yoffset);
 		};
 
-		auto MouseEnterCallback = [](GLFWwindow* window, int entered) {
+		auto MouseEnterCallback = [](GLFWwindow* window, int entered)
+		{
 			// Set flag to prevent large mouse delta on entering screen
 			Input::getInstance()->m_firstMouseMove = true;
 		};
@@ -69,15 +77,18 @@ namespace aie {
 		m_mouseScroll = 0;
 	}
 
-	Input::~Input() {
+	Input::~Input()
+	{
 		delete[] m_lastKeys;
 		delete[] m_currentKeys;
 	}
 
-	void Input::onMouseMove(int newXPos, int newYPos) {
+	void Input::onMouseMove(int newXPos, int newYPos)
+	{
 		m_mouseX = newXPos;
 		m_mouseY = newYPos;
-		if (m_firstMouseMove) {
+		if (m_firstMouseMove)
+		{
 			// On first move after startup/entering window reset old mouse position
 			m_oldMouseX = newXPos;
 			m_oldMouseY = newYPos;
@@ -85,7 +96,8 @@ namespace aie {
 		}
 	}
 
-	void Input::clearStatus() {
+	void Input::clearStatus()
+	{
 		m_pressedCharacters.clear();
 
 		auto window = glfwGetCurrentContext();
@@ -93,7 +105,8 @@ namespace aie {
 		m_pressedKeys.clear();
 
 		// update keys
-		for (int i = GLFW_KEY_SPACE; i <= GLFW_KEY_LAST; ++i) {
+		for (int i = GLFW_KEY_SPACE; i <= GLFW_KEY_LAST; ++i)
+		{
 			m_lastKeys[i] = m_currentKeys[i];
 
 			if ((m_currentKeys[i] = glfwGetKey(window, i)) == GLFW_PRESS)
@@ -101,7 +114,8 @@ namespace aie {
 		}
 
 		// update mouse
-		for (int i = 0; i < 8; ++i) {
+		for (int i = 0; i < 8; ++i)
+		{
 			m_lastButtons[i] = m_currentButtons[i];
 			m_currentButtons[i] = glfwGetMouseButton(window, i);
 		}
@@ -111,63 +125,77 @@ namespace aie {
 		m_oldMouseY = m_mouseY;
 	}
 
-	bool Input::isKeyDown(int inputKeyID) {
+	bool Input::isKeyDown(int inputKeyID)
+	{
 		return m_currentKeys[inputKeyID] == GLFW_PRESS;
 	}
 
-	bool Input::isKeyUp(int inputKeyID) {
+	bool Input::isKeyUp(int inputKeyID)
+	{
 		return m_currentKeys[inputKeyID] == GLFW_RELEASE;
 	}
 
-	bool Input::wasKeyPressed(int inputKeyID) {
+	bool Input::wasKeyPressed(int inputKeyID)
+	{
 		return m_currentKeys[inputKeyID] == GLFW_PRESS &&
 			m_lastKeys[inputKeyID] == GLFW_RELEASE;
 	}
 
-	bool Input::wasKeyReleased(int inputKeyID) {
+	bool Input::wasKeyReleased(int inputKeyID)
+	{
 		return m_currentKeys[inputKeyID] == GLFW_RELEASE &&
 			m_lastKeys[inputKeyID] == GLFW_PRESS;
 	}
 
-	const std::vector<int>& Input::getPressedKeys() const {
+	const std::vector<int>& Input::getPressedKeys() const
+	{
 		return m_pressedKeys;
 	}
 
-	const std::vector<unsigned int>& Input::getPressedCharacters() const {
+	const std::vector<unsigned int>& Input::getPressedCharacters() const
+	{
 		return m_pressedCharacters;
 	}
 
-	bool Input::isMouseButtonDown(int inputMouseID) {
+	bool Input::isMouseButtonDown(int inputMouseID)
+	{
 		return m_currentButtons[inputMouseID] == GLFW_PRESS;
 	}
 
-	bool Input::isMouseButtonUp(int inputMouseID) {
+	bool Input::isMouseButtonUp(int inputMouseID)
+	{
 		return m_currentButtons[inputMouseID] == GLFW_RELEASE;
 	}
 
-	bool Input::wasMouseButtonPressed(int inputMouseID) {
+	bool Input::wasMouseButtonPressed(int inputMouseID)
+	{
 		return m_currentButtons[inputMouseID] == GLFW_PRESS &&
 			m_lastButtons[inputMouseID] == GLFW_RELEASE;
 	}
 
-	bool Input::wasMouseButtonReleased(int inputMouseID) {
+	bool Input::wasMouseButtonReleased(int inputMouseID)
+	{
 		return m_currentButtons[inputMouseID] == GLFW_RELEASE &&
 			m_lastButtons[inputMouseID] == GLFW_PRESS;
 	}
 
-	int Input::getMouseX() {
+	int Input::getMouseX()
+	{
 		return m_mouseX;
 	}
 
-	int Input::getMouseY() {
+	int Input::getMouseY()
+	{
 		return m_mouseY;
 	}
 
-	double Input::getMouseScroll() {
+	double Input::getMouseScroll()
+	{
 		return m_mouseScroll;
 	}
 
-	void Input::getMouseXY(int* x, int* y) {
+	void Input::getMouseXY(int* x, int* y)
+	{
 		if (x != nullptr) *x = m_mouseX;
 		if (y != nullptr) *y = m_mouseY;
 	}

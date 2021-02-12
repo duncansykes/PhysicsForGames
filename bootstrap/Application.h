@@ -3,10 +3,12 @@
 // forward declared structure for access to GLFW window
 struct GLFWwindow;
 
-namespace aie {
+namespace aie
+{
 	// this is the pure-virtual base class that wraps up an application for us.
 	// we derive our own applications from this class
-	class Application {
+	class Application
+	{
 	public:
 
 		Application();

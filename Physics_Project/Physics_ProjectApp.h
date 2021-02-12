@@ -5,7 +5,8 @@
 #include "Sphere.h"
 #include "PhysicsScene.h"
 
-class Physics_ProjectApp : public aie::Application {
+class Physics_ProjectApp : public aie::Application
+{
 public:
 
 	Physics_ProjectApp();
@@ -25,7 +26,6 @@ public:
 	void SpringTest(int a_amount);
 	void GameScene(int a_amount = 0);
 
-
 protected:
 
 	aie::Renderer2D* m_2dRenderer;
@@ -36,11 +36,10 @@ protected:
 	Sphere* mouseTrigger;
 	Sphere* whiteBall;
 
-
 	glm::vec4 RED;
 	glm::vec4 GREEN;
 	glm::vec4 BLUE;
-	
+
 	unsigned int sphereNumber;
 
 	const float m_aspectRatio = 16.0f / 9.0f;

@@ -2,12 +2,15 @@
 
 #include <string>
 
-namespace aie {
+namespace aie
+{
 	// a class for wrapping up an opengl texture image
-	class Texture {
+	class Texture
+	{
 	public:
 
-		enum Format : unsigned int {
+		enum Format : unsigned int
+		{
 			RED = 1,
 			RG,
 			RGB,

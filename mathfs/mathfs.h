@@ -7,7 +7,8 @@ template <typename T> class tVector4;
 template <typename T> class tMatrix2;
 template <typename T> class tMatrix3;
 template <typename T> class tMatrix4;
-namespace mathfs {
+namespace mathfs
+{
 	template <typename T>
 	class tVector2
 	{

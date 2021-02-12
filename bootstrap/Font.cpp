@@ -5,16 +5,19 @@
 #define STB_TRUETYPE_IMPLEMENTATION
 #include <stb_truetype.h>
 
-namespace aie {
+namespace aie
+{
 	Font::Font(const char* trueTypeFontFile, unsigned short fontHeight)
 		: m_glyphData(nullptr),
 		m_glHandle(0),
 		m_pixelBufferHandle(0),
 		m_textureWidth(0),
-		m_textureHeight(0) {
+		m_textureHeight(0)
+	{
 		FILE* file = nullptr;
 		fopen_s(&file, trueTypeFontFile, "rb");
-		if (file != nullptr) {
+		if (file != nullptr)
+		{
 			unsigned char* ttf_buffer = new unsigned char[4096 * 1024];
 
 			fread(ttf_buffer, 1, 4096 * 1024, file);
@@ -24,7 +27,8 @@ namespace aie {
 			m_textureWidth = fontHeight / 16 * 256;
 			m_textureHeight = fontHeight / 16 * 256;
 
-			if (fontHeight <= 16) {
+			if (fontHeight <= 16)
+			{
 				m_textureWidth = 256;
 				m_textureHeight = 256;
 			}
@@ -63,19 +67,22 @@ namespace aie {
 		}
 	}
 
-	Font::~Font() {
+	Font::~Font()
+	{
 		delete[](stbtt_bakedchar*)m_glyphData;
 
 		glDeleteTextures(1, &m_glHandle);
 		glDeleteBuffers(1, &m_pixelBufferHandle);
 	}
 
-	float Font::getStringWidth(const char* str) {
+	float Font::getStringWidth(const char* str)
+	{
 		stbtt_aligned_quad Q = {};
 		float xPos = 0.0f;
 		float yPos = 0.0f;
 
-		while (*str != 0) {
+		while (*str != 0)
+		{
 			stbtt_GetBakedQuad(
 				(stbtt_bakedchar*)m_glyphData,
 				m_textureWidth,
@@ -89,13 +96,15 @@ namespace aie {
 		return Q.x1;
 	}
 
-	float Font::getStringHeight(const char* str) {
+	float Font::getStringHeight(const char* str)
+	{
 		stbtt_aligned_quad Q = {};
 		float low = 9999999, high = -9999999;
 		float xPos = 0.0f;
 		float yPos = 0.0f;
 
-		while (*str != 0) {
+		while (*str != 0)
+		{
 			stbtt_GetBakedQuad(
 				(stbtt_bakedchar*)m_glyphData,
 				m_textureWidth,
@@ -111,13 +120,15 @@ namespace aie {
 		return high - low;
 	}
 
-	void Font::getStringSize(const char* str, float& width, float& height) {
+	void Font::getStringSize(const char* str, float& width, float& height)
+	{
 		stbtt_aligned_quad Q = {};
 		float low = 9999999, high = -9999999;
 		float xPos = 0.0f;
 		float yPos = 0.0f;
 
-		while (*str != 0) {
+		while (*str != 0)
+		{
 			stbtt_GetBakedQuad(
 				(stbtt_bakedchar*)m_glyphData,
 				m_textureWidth,
@@ -134,14 +145,16 @@ namespace aie {
 		width = Q.x1;
 	}
 
-	void Font::getStringRectangle(const char* str, float& x0, float& y0, float& x1, float& y1) {
+	void Font::getStringRectangle(const char* str, float& x0, float& y0, float& x1, float& y1)
+	{
 		stbtt_aligned_quad Q = {};
 		y1 = 9999999, y0 = -9999999;
 		x0 = 9999999, x1 = -9999999;
 		float xPos = 0.0f;
 		float yPos = 0.0f;
 
-		while (*str != 0) {
+		while (*str != 0)
+		{
 			stbtt_GetBakedQuad(
 				(stbtt_bakedchar*)m_glyphData,
 				m_textureWidth,

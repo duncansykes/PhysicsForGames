@@ -9,13 +9,16 @@ using glm::vec4;
 using glm::mat4;
 using aie::Gizmos;
 
-Application3D::Application3D() {
+Application3D::Application3D()
+{
 }
 
-Application3D::~Application3D() {
+Application3D::~Application3D()
+{
 }
 
-bool Application3D::startup() {
+bool Application3D::startup()
+{
 	setBackgroundColour(0.25f, 0.25f, 0.25f);
 
 	// initialise gizmo primitive counts
@@ -30,11 +33,13 @@ bool Application3D::startup() {
 	return true;
 }
 
-void Application3D::shutdown() {
+void Application3D::shutdown()
+{
 	Gizmos::destroy();
 }
 
-void Application3D::update(float deltaTime) {
+void Application3D::update(float deltaTime)
+{
 	// query time since application started
 	float time = getTime();
 
@@ -48,7 +53,8 @@ void Application3D::update(float deltaTime) {
 	// draw a simple grid with gizmos
 	vec4 white(1);
 	vec4 black(0, 0, 0, 1);
-	for (int i = 0; i < 21; ++i) {
+	for (int i = 0; i < 21; ++i)
+	{
 		Gizmos::addLine(vec3(-10 + i, 0, 10),
 			vec3(-10 + i, 0, -10),
 			i == 10 ? white : black);
@@ -83,7 +89,8 @@ void Application3D::update(float deltaTime) {
 		quit();
 }
 
-void Application3D::draw() {
+void Application3D::draw()
+{
 	// wipe the screen to the background colour
 	clearScreen();
 
