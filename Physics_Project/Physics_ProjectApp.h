@@ -25,6 +25,7 @@ public:
 	void SphereAndPlane();
 	void SpringTest(int a_amount);
 	void GameScene(int a_amount = 0);
+	void GenerateStart();
 
 protected:
 
@@ -35,6 +36,7 @@ protected:
 	Sphere* ballTest;
 	Sphere* mouseTrigger;
 	Sphere* whiteBall;
+	Sphere* billardBalll;
 
 	glm::vec4 RED;
 	glm::vec4 GREEN;
