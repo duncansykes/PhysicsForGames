@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "Renderer2D.h"
 #include "Sphere.h"
+#include "Box.h"
 #include "PhysicsScene.h"
 
 class Physics_ProjectApp : public aie::Application
@@ -37,6 +38,8 @@ protected:
 	Sphere* mouseTrigger;
 	Sphere* whiteBall;
 	Sphere* billardBalll;
+
+	Box* bounds;
 
 	glm::vec4 RED;
 	glm::vec4 GREEN;

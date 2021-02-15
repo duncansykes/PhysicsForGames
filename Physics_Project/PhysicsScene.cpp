@@ -244,8 +244,7 @@ bool PhysicsScene::Sphere2Box(PhysicsObject* objSphere, PhysicsObject* objBox)
 	Sphere* sphere = dynamic_cast<Sphere*>(objSphere);
 	Box* box = dynamic_cast<Box*>(objBox);
 
-	if (box != nullptr && sphere != nullptr)
-	{
+	
 		// Transform the circle into the box's coordinate space
 		glm::vec2 circlePosWorld = sphere->GetPosition() - box->GetPosition();
 		glm::vec2 circlePosBox = glm::vec2(glm::dot(circlePosWorld, box->GetLocalX()),
@@ -288,11 +287,13 @@ bool PhysicsScene::Sphere2Box(PhysicsObject* objSphere, PhysicsObject* objBox)
 			glm::vec2 direction = glm::normalize(circleToBox);
 			glm::vec2 contact = closestPointOnBoxWorld;
 			box->ResolveCollision(sphere, contact, &direction, penetration);
-		}
-	}
 
-	return false;
+		}
+
+	
+		return false; 
 }
+
 
 bool PhysicsScene::Box2Plane(PhysicsObject* objPlane, PhysicsObject* objBox)
 {

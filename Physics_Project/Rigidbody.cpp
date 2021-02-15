@@ -20,6 +20,8 @@ Rigidbody::Rigidbody(ShapeType a_shapeID, glm::vec2 a_position, glm::vec2 a_velo
 
 void Rigidbody::FixedUpdate(glm::vec2 a_gravity, float a_timeStep)
 {
+	this->returnPosition = m_position;
+
 	if (m_isKinematic)
 	{
 		m_velocity = glm::vec2(0);
@@ -129,6 +131,7 @@ void Rigidbody::ResolveCollision(Rigidbody* a_otherActor, glm::vec2 a_contact, g
 		}
 		else
 		{
+			
 			TriggerEnter(a_otherActor);
 			a_otherActor->TriggerEnter(this);
 		}
@@ -136,6 +139,7 @@ void Rigidbody::ResolveCollision(Rigidbody* a_otherActor, glm::vec2 a_contact, g
 		{
 			PhysicsScene::ApplyContactForces(this, a_otherActor, normal, a_pen);
 		}
+		
 	}
 }
 

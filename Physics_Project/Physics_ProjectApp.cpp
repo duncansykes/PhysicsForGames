@@ -42,6 +42,7 @@ bool Physics_ProjectApp::startup()
 	m_physicsScene->SetTimeStep(0.01f);
 	sphereNumber = 1;
 	mouseTrigger = new Sphere(glm::vec2(0), glm::vec2(0), 10, 6, BLUE);
+	mouseTrigger->SetTrigger(true);
 	m_physicsScene->addActor(mouseTrigger);
 	GameScene(10);
 	return true;
@@ -65,11 +66,16 @@ void Physics_ProjectApp::update(float deltaTime)
 	int xScreen, yScreen;
 	input->getMouseXY(&xScreen, &yScreen);
 	glm::vec2 worldPos = ScreenToWorld(glm::vec2(xScreen, yScreen));
+	//mouseTrigger->ApplyForce(glm::vec2(worldPos.x / 5, worldPos.y / 5), glm::vec2(0));
 	mouseTrigger->SetPosition(worldPos);
 
-	ballTest->triggerEnter = [=](PhysicsObject* other)
+	mouseTrigger->triggerEnter = [=](PhysicsObject* other)
 	{
-		std::cout << "Entered: " << other << std::endl; 
+		if (input->isMouseButtonDown(0))
+		{
+			std::cout << "Entered: " << other << std::endl; 
+			
+		}
 	};
 	//ballTest->triggerExit = [=](PhysicsObject* other) { std::cout << "Entered: " << other << std::endl; };
 
@@ -214,6 +220,13 @@ void Physics_ProjectApp::GameScene(int a_amount)
 	float spacing_X = 70;
 	float spacing_Y = 40;
 	float sizeOfHole = 8;
+	
+	bounds = new Box(glm::vec2(-70, 0), glm::vec2(0), 0, 10, 2, 50, BLUE); bounds->SetKinematic(true); m_physicsScene->addActor(bounds);
+	bounds = new Box(glm::vec2(75, 0), glm::vec2(0), 0, 10, 2, 50, BLUE); bounds->SetKinematic(true); m_physicsScene->addActor(bounds);
+	bounds = new Box(glm::vec2(0, 45), glm::vec2(0), 0, 10, 79, 2, BLUE); bounds->SetKinematic(true); m_physicsScene->addActor(bounds);
+	bounds = new Box(glm::vec2(0, -45), glm::vec2(0), 0, 10, 79, 2, BLUE); bounds->SetKinematic(true); m_physicsScene->addActor(bounds);
+
+	
 	for (int i = 0; i < fr; i++)
 	{
 		glm::vec2 posFinal(0, 0);
@@ -233,7 +246,8 @@ void Physics_ProjectApp::GameScene(int a_amount)
 	}
 	
 
-
+	
+	
 
 
 
@@ -252,7 +266,6 @@ void Physics_ProjectApp::GenerateStart()
 
 	for (int a = 0; a <= 10; a++)
 	{
-		
 		// Backrow = 4 total balls
 		if (a <= 4) 
 		{
@@ -260,25 +273,18 @@ void Physics_ProjectApp::GenerateStart()
 			if (yPos >= 4)
 			{
 				yPos = 0;
-			}
-
-			
+			}			
 		}
-
 		// 2nd back row = 3 total balls
 		if (a < 7 && a >= 4)
 		{
-			billardBalll = new Sphere(glm::vec2(xAnchor - 10, 5 +(yAnchor + (-yPos) * spacing)), glm::vec2(0), 20, 2, RED); billardBalll->SetID(a); m_physicsScene->addActor(billardBalll);
-			
-
-			
+			billardBalll = new Sphere(glm::vec2(xAnchor - 10, 5 +(yAnchor + (-yPos) * spacing)), glm::vec2(0), 20, 2, RED); billardBalll->SetID(a); m_physicsScene->addActor(billardBalll);			
 		}
 
 		// 2nd FRONT row = 2 total balls
 		if (a < 9 && a >= 7)
 		{
-			billardBalll = new Sphere(glm::vec2(xAnchor - 20, (yAnchor + (-yPos) * spacing )),   glm::vec2(0), 10, 2, BLUE); billardBalll->SetID(a); m_physicsScene->addActor(billardBalll);
-			
+			billardBalll = new Sphere(glm::vec2(xAnchor - 20, (yAnchor + (-yPos) * spacing )),   glm::vec2(0), 10, 2, BLUE); billardBalll->SetID(a); m_physicsScene->addActor(billardBalll);		
 			std::cout << yAnchor + (-yPos) * spacing << std::endl;
 			if (yPos >= 2)
 			{
@@ -286,13 +292,11 @@ void Physics_ProjectApp::GenerateStart()
 			}
 		}
 
-
 		if (yPos >= 3)
 		{
 			yPos = 0;
 		}
-		yPos++;
-		
+		yPos++;	
 	}
 
 
@@ -300,6 +304,6 @@ void Physics_ProjectApp::GenerateStart()
 
 	billardBalll = new Sphere(glm::vec2(xAnchor - 30, (5)), glm::vec2(0), 10, 2, BLUE); billardBalll->SetID(10); m_physicsScene->addActor(billardBalll);
 
-	whiteBall = new Sphere(glm::vec2(0, 5), glm::vec2(50, 10), 10, 5, glm::vec4(1, 1, 1, 1)); m_physicsScene->addActor(whiteBall);
+	whiteBall = new Sphere(glm::vec2(0, 5), glm::vec2(100, 20), 10, 5, glm::vec4(1, 1, 1, 1)); m_physicsScene->addActor(whiteBall);
 }
 
