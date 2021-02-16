@@ -51,6 +51,7 @@ protected:
 	glm::vec2 m_mouseVelocity;
 	glm::vec2 m_prevPos;
 
+	glm::vec2 firedVelocity;
 
 	float mouseState;
 

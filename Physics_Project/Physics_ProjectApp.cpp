@@ -57,7 +57,7 @@ void Physics_ProjectApp::shutdown()
 
 void Physics_ProjectApp::update(float deltaTime)
 {
-	//m_physicsScene->GetPole()->SetRotation(0);
+	
 	// input example
 	aie::Input* input = aie::Input::getInstance();
 	aie::Gizmos::clear();
@@ -88,31 +88,16 @@ void Physics_ProjectApp::update(float deltaTime)
 		m_physicsScene->GetPole()->SetVelocity(m_mouseVelocity);
 		// Update physics scene
 	}
-	if (input->isKeyDown(aie::INPUT_KEY_F))
+	
+	
+	if (input->wasKeyPressed(aie::INPUT_KEY_K))
 	{
-		m_physicsScene->GetPole()->SetPosition(worldPos);
-
-	}	
-	if (input->isKeyDown(aie::INPUT_KEY_R))
-	{
-		m_physicsScene->GetPole()->SetRotation(0);
+			
+			m_physicsScene->GetPole()->SetVelocity(glm::vec2(m_physicsScene->GetPole()->GetRotation()));			
+			
 	}
-	if (input->isKeyDown(aie::INPUT_KEY_K))
-	{
-		if (toggle == false)
-		{
-			toggle = true;
-			m_physicsScene->GetPole()->SetKinematic(true);
-			return;
-		}
-		if (toggle == true)
-		{
-			toggle = false;
-			m_physicsScene->GetPole()->SetKinematic(false);
-			return;
-		}		
-	}
-
+	m_physicsScene->GetPole()->SetRotation(input->getMouseScroll() * deltaTime * 5);
+	
 	m_prevPos = worldPos;
 	mouseState = input->isMouseButtonDown(0);
 	m_physicsScene->draw();
