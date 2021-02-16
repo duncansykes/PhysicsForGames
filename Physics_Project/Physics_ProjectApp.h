@@ -28,13 +28,14 @@ public:
 	void GameScene(int a_amount = 0);
 	void GenerateStart();
 
+	bool toggle = false;
 protected:
 
 	aie::Renderer2D* m_2dRenderer;
 	aie::Font* m_font;
 
 	PhysicsScene* m_physicsScene;
-	Sphere* ballTest;
+	Sphere* hole;
 	Sphere* mouseTrigger;
 	Sphere* whiteBall;
 	Sphere* billardBalll;
@@ -46,6 +47,12 @@ protected:
 	glm::vec4 BLUE;
 
 	unsigned int sphereNumber;
+
+	glm::vec2 m_mouseVelocity;
+	glm::vec2 m_prevPos;
+
+
+	float mouseState;
 
 	const float m_aspectRatio = 16.0f / 9.0f;
 	const float m_extents = 100.0f;

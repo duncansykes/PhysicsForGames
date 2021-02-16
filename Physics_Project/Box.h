@@ -24,9 +24,11 @@ public:
 	glm::vec2 GetLocalX() { return m_localX; }
 	glm::vec2 GetLocalY() { return m_localY; }
 
+	void SetRotation(float rotate) { m_rotation = rotate; }
+
 protected:
 	// The half length of the box
 	glm::vec2 m_extents;
-
+	bool m_isRotate;
 	glm::vec4 m_color;
 };

@@ -8,7 +8,7 @@ Plane::Plane(glm::vec2 a_normal, float a_distance) :
 {
 	m_normal = glm::normalize(a_normal);
 	m_distanceToOrigin = a_distance;
-	m_colour = glm::vec4(0, 1, 0, 1);
+	m_colour = glm::vec4(1, 1, 1, 1);
 }
 
 Plane::Plane() : PhysicsObject(PLANE)

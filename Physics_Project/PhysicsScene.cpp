@@ -297,7 +297,7 @@ bool PhysicsScene::Sphere2Box(PhysicsObject* objSphere, PhysicsObject* objBox)
 
 bool PhysicsScene::Box2Plane(PhysicsObject* objPlane, PhysicsObject* objBox)
 {
-	return Plane2Box(objPlane, objBox);
+	return Plane2Box(objBox, objPlane);
 }
 
 bool PhysicsScene::Box2Sphere(PhysicsObject* objBox, PhysicsObject* objSphere)

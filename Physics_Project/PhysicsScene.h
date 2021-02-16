@@ -45,9 +45,23 @@ public:
 	static bool Box2Sphere(PhysicsObject*, PhysicsObject*);
 	static bool Box2Box(PhysicsObject*, PhysicsObject*);
 
+
+	void SetPole(Rigidbody* pole) { m_pole = pole; }
+	Rigidbody* GetPole() { return m_pole; }
+
+	void SetBall(Rigidbody* ball) { m_ball = ball; }
+	Rigidbody* GetBall() { return m_ball; }
+
+	float ballsSunk;
+
+	std::vector<Rigidbody*> balls;
+
 protected:
 	glm::vec2 m_gravity;
 	float m_timeStep;
+
+	Rigidbody* m_pole;
+	Rigidbody* m_ball;
 
 	std::vector<PhysicsObject*> m_actors;
 };

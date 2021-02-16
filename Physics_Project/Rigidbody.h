@@ -18,6 +18,9 @@ public:
 
 	glm::vec2 GetPosition() const { return m_position; }
 	glm::vec2 GetVelocity() { return m_velocity; }
+	void SetVelocity(glm::vec2 v) { m_velocity = v; }
+
+
 	float GetMass() { return m_isKinematic ? INT_MAX : m_mass; }
 	float GetRotation() { return m_rotation; }
 

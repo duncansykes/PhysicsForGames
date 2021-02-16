@@ -6,8 +6,11 @@ Box::Box(glm::vec2 a_position, glm::vec2 a_velocity, float a_rotation, float a_m
 {
 	m_extents = glm::vec2(a_width, a_height);
 	m_color = glm::vec4(1, 0, 0, 1);
-	m_moment = 1.0f / 3.0f * m_mass * a_width * a_height;
-	m_rotation = a_rotation;
+	/*m_moment = 1.0f / 3.0f * m_mass * a_width * a_height;
+	
+	m_rotation = a_rotation;*/
+
+	
 }
 
 Box::Box(glm::vec2 a_position, glm::vec2 a_velocity, float a_rotation, float a_mass, float a_width, float a_height, glm::vec4 a_color)
@@ -15,8 +18,8 @@ Box::Box(glm::vec2 a_position, glm::vec2 a_velocity, float a_rotation, float a_m
 {
 	m_extents = glm::vec2(a_width, a_height);
 	m_color = a_color;
-	m_moment = 1.0f / 3.0f * m_mass * a_width * a_height;
-	m_rotation = a_rotation;
+	/*m_moment = 1.0f / 3.0f * m_mass * a_width * a_height;
+	m_rotation = a_rotation;*/
 }
 
 Box::~Box()
@@ -43,6 +46,8 @@ void Box::MakeGizmo()
 
 	aie::Gizmos::add2DTri(p1, p2, p4, m_color);
 	aie::Gizmos::add2DTri(p1, p4, p3, m_color);
+
+	
 }
 
 bool Box::CheckBoxCorners(const Box& a_box, glm::vec2& a_contact, int& a_numContacts, float& a_pen, glm::vec2& a_edgeNormal)
