@@ -45,6 +45,8 @@ protected:
 	glm::vec4 RED;
 	glm::vec4 GREEN;
 	glm::vec4 BLUE;
+	glm::vec4 WHITELINES;
+	glm::vec4 REDLINES;
 
 	unsigned int sphereNumber;
 
