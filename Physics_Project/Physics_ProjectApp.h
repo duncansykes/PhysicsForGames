@@ -50,6 +50,9 @@ protected:
 	glm::vec4 REDLINES;
 	glm::vec4 GREENLINES;
 
+	int iteratorDebug = 0;
+
+	bool whiteBallMoving = false;
 	unsigned int sphereNumber;
 
 	glm::vec2 m_mouseVelocity;
@@ -58,6 +61,7 @@ protected:
 
 	glm::vec2 firedVelocity;
 
+	float lineLength;
 	float mouseState;
 
 	const float m_aspectRatio = 16.0f / 9.0f;
