@@ -36,6 +36,7 @@ protected:
 
 	PhysicsScene* m_physicsScene;
 	Sphere* hole;
+	Sphere* pole;
 	Sphere* mouseTrigger;
 	Sphere* whiteBall;
 	Sphere* billardBalll;
@@ -47,10 +48,12 @@ protected:
 	glm::vec4 BLUE;
 	glm::vec4 WHITELINES;
 	glm::vec4 REDLINES;
+	glm::vec4 GREENLINES;
 
 	unsigned int sphereNumber;
 
 	glm::vec2 m_mouseVelocity;
+	glm::vec2 velo;
 	glm::vec2 m_prevPos;
 
 	glm::vec2 firedVelocity;

@@ -11,7 +11,8 @@ public:
 
 	float GetRadius() { return m_radius; }
 	glm::vec4 GetColour() { return m_color; }
-
+	void SetColor(glm::vec4 color) { m_color = color; }
+	bool ShowLine = true;
 	void SetID(int a_id) { m_id = a_id; }
 	int GetID() { return m_id; }
 
