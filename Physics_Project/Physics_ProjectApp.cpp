@@ -94,24 +94,27 @@ void Physics_ProjectApp::update(float deltaTime)
 	if (input->isKeyDown(aie::INPUT_KEY_D))
 	{
 		aie::Gizmos::add2DLine(whiteBall->GetPosition(), m_physicsScene->balls[iteratorDebug]->GetPosition(), glm::vec4(1, 1, 1, 1));
-		
+
 	}
 	if (input->wasKeyReleased(aie::INPUT_KEY_D))
 	{
 		iteratorDebug = iteratorDebug + 1;
-		if (iteratorDebug >= m_physicsScene->balls.size())
-		{
-			iteratorDebug = 0;
-		}
 
 
 	}
-
+	if (iteratorDebug >= m_physicsScene->balls.size())
+	{
+		iteratorDebug = 0;
+	}
+	if (m_physicsScene->balls.size() == 0)
+	{
+		aie::Application::destroyWindow();
+	}
 	// Check state of mouse button
 	if (input->isMouseButtonDown(0))
 	{
 		// add iterator keybind
-		
+
 
 		lineLength = glm::distance(worldPos, whiteBall->GetPosition());
 
