@@ -42,7 +42,7 @@ public:
 	std::function<void(PhysicsObject*)> triggerExit;
 	bool IsTrigger() { return m_isTrigger; }
 	bool SetTrigger(bool a_state) { return m_isTrigger = a_state; }
-
+	bool InHole = false;
 protected:
 	bool m_isTrigger;
 

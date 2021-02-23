@@ -69,6 +69,19 @@ void Physics_ProjectApp::update(float deltaTime)
 
 	float maxDist = 30.f;
 
+	for (auto ball : m_physicsScene->balls)
+	{
+		if (ball->InHole == true)
+		{
+			m_physicsScene->removeActor(ball);
+			auto it = std::find(m_physicsScene->balls.begin(), m_physicsScene->balls.end(), ball);
+
+			if (it != m_physicsScene->balls.end())
+			{
+				m_physicsScene->balls.erase(it);
+			}
+		}
+	}
 
 	// Get mouse position on screen
 	int xScreen, yScreen;
@@ -78,10 +91,19 @@ void Physics_ProjectApp::update(float deltaTime)
 	// Set mouse velocity
 	m_mouseVelocity = (-worldPos - -m_prevPos) / deltaTime;
 
-	if (input->wasKeyPressed(aie::INPUT_KEY_D))
+	if (input->isKeyDown(aie::INPUT_KEY_D))
 	{
-	
-		aie::Gizmos::add2DLine(whiteBall->GetPosition(), m_physicsScene->balls[0]->GetPosition(), glm::vec4(1, 1, 1, 1));
+		aie::Gizmos::add2DLine(whiteBall->GetPosition(), m_physicsScene->balls[iteratorDebug]->GetPosition(), glm::vec4(1, 1, 1, 1));
+		
+	}
+	if (input->wasKeyReleased(aie::INPUT_KEY_D))
+	{
+		iteratorDebug = iteratorDebug + 1;
+		if (iteratorDebug >= m_physicsScene->balls.size())
+		{
+			iteratorDebug = 0;
+		}
+
 
 	}
 
@@ -309,25 +331,28 @@ void Physics_ProjectApp::GameScene(int a_amount)
 
 		hole->triggerEnter = [=](PhysicsObject* other)
 		{
-			/*if (other == whiteBall)
-			{
-				whiteBall->SetPosition(glm::vec2(-5, 5));
-				whiteBall->SetVelocity(glm::vec2(0));
-			}*/
+		
 
 			std::cout << "Entered: " << other << std::endl;
 			for (auto ball : m_physicsScene->balls)
 			{
 				if (other == ball)
 				{		
-					if (glm::distance(hole->GetPosition(), ball->GetPosition()) < 2.f);
+					ball->InHole = true;	
+					/*if (glm::distance(hole->GetPosition(), ball->GetPosition()) < 2.f);
 					{
 						std::cout << "Ball sunk" << "\n";
 						m_physicsScene->ballsSunk = m_physicsScene->ballsSunk + 1;
-						ball->SetPosition(glm::vec2(100, 100));
-						ball->SetKinematic(true);
-					}
-					
+
+						auto it = std::find(m_physicsScene->balls.begin(), m_physicsScene->balls.end(),ball);
+
+						if (it != m_physicsScene->balls.end())
+						{
+							m_physicsScene->balls.erase(it);
+						}
+						
+
+					}*/		
 				}
 			}
 		};
@@ -355,15 +380,8 @@ void Physics_ProjectApp::GameScene(int a_amount)
 			for (auto ball : m_physicsScene->balls)
 			{
 				if (other == ball)
-				{	
-					if (glm::distance(hole->GetPosition(), ball->GetPosition()) < 2.f); // end float being distance to hole
-					{
-						std::cout << "Ball sunk" << "\n";
-						m_physicsScene->ballsSunk = m_physicsScene->ballsSunk + 1;
-						ball->SetPosition(glm::vec2(100,100));
-						ball->SetKinematic(true);
-					}
-					
+				{
+					ball->InHole = true;
 				}
 			}
 		};
